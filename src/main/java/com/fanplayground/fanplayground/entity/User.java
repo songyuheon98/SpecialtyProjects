@@ -36,9 +36,9 @@ public class User {
     @NotBlank(message = "닉네임은 필수 값 입니다.")
     private String nickName;
 
-    @Column(name = "email", nullable = false)
-    @NotBlank(message = "닉네임은 필수 값 입니다.")
-    private String email;
+//    @Column(name = "email", nullable = false)
+//    @NotBlank(message = "닉네임은 필수 값 입니다.")
+//    private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonBackReference
@@ -54,7 +54,6 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.email = email;
     }
 
     public void addPostList(Post post){

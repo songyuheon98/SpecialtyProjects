@@ -3,6 +3,8 @@ package com.fanplayground.fanplayground.service;
 
 import com.fanplayground.fanplayground.dto.LoginRequestDto;
 import com.fanplayground.fanplayground.dto.SignupRequestDto;
+import com.fanplayground.fanplayground.dto.UserUpdateRequestDto;
+import com.fanplayground.fanplayground.dto.UserUpdateResponseDto;
 import com.fanplayground.fanplayground.entity.Message;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserRoleEnum;
