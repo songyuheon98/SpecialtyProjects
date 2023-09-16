@@ -57,4 +57,10 @@ public class Board {
     public void addUserBoardList(UserBoard userBoard) {
         this.userBoards.add(userBoard);
     }
+
+    public void update(BoardCreateRequestDto requestDto) {
+        this.boardName = requestDto.getBoardName();
+        this.boardColor = requestDto.getBoardColor();
+        this.boardInfo = requestDto.getBoardInfo();
+    }
 }

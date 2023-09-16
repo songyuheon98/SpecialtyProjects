@@ -1,11 +1,10 @@
 package com.fanplayground.fanplayground.controller;
 
-import com.fanplayground.fanplayground.dto.BoardCreateRequestDto;
-import com.fanplayground.fanplayground.dto.BoardCreateResponseDto;
-import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
-import com.fanplayground.fanplayground.dto.PostResponseDto;
+import com.fanplayground.fanplayground.dto.*;
+import com.fanplayground.fanplayground.jwt.JwtUtil;
 import com.fanplayground.fanplayground.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,17 +46,31 @@ public class BoardController {
     public List<BoardReadAllResponseDto> ReadAllUserBoard() {
         return boardService.readAllUserBoard();
     }
+
+    @GetMapping("/board/userEnableBoard")
+    public List<BoardReadAllResponseDto> ReadAllUserEnableBoard() {
+        return boardService.readAllUserEnableBoard();
+    }
+
+    @PostMapping("/board/invite")
+    public BoardInviteResponseDto boardInvite(@RequestBody BoardInviteRequestDto requestDto) {
+        return boardService.boardInvite(requestDto);
+    }
 //
-//    //@PathVariable uri -> id
-//    @PutMapping("/post/{id}")
-//    public ResponseEntity<?> updatePost(@PathVariable Long id,@RequestBody PostRequestDto requestDto,
-//                                            @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue){
-//        return postService.updatePost(id, requestDto, tokenValue);
-//    }
+    //@PathVariable uri -> id
+    @PutMapping("/board/{boardId}")
+    public BoardInviteResponseDto boardUpdate(@PathVariable Long
+
+                                                          boardId, @RequestBody BoardCreateRequestDto requestDto){
+        return boardService.boardUpdate(boardId,requestDto);
+    }
 //
-//    @DeleteMapping("/post/{id}")
-//    public ResponseEntity<Message> deletePost(@PathVariable Long id, @CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue){
-//        return postService.deletePost(id,  tokenValue);
-//    }
+
+    @DeleteMapping("/board/{boardId}")
+    public BoardInviteResponseDto deleteBoard(@PathVariable Long boardId){
+        return boardService.deleteBoard(boardId);
+    }
 
 }
+
+
