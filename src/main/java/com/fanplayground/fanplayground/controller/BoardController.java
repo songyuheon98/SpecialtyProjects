@@ -2,6 +2,7 @@ package com.fanplayground.fanplayground.controller;
 
 import com.fanplayground.fanplayground.dto.BoardCreateRequestDto;
 import com.fanplayground.fanplayground.dto.BoardCreateResponseDto;
+import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
 import com.fanplayground.fanplayground.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +30,10 @@ public class BoardController {
         return boardService.createBoard(requestDto);
     }
 
-//    @GetMapping("/board") // Slice
-//    public List<BoardReadAllResponseDto> ReadAllBoard(){
-//        return boardService.ReadAllBoard();
-//    }
+    @GetMapping("/board") // Slice
+    public List<BoardReadAllResponseDto> ReadAllBoard(){
+        return boardService.ReadAllBoard();
+    }
 
 //
 //    // @RequestBody -> Json 기반의 메시지를 사용하는 요청의 경우

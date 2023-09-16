@@ -2,6 +2,7 @@ package com.fanplayground.fanplayground.service;
 
 import com.fanplayground.fanplayground.dto.BoardCreateRequestDto;
 import com.fanplayground.fanplayground.dto.BoardCreateResponseDto;
+import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
 import com.fanplayground.fanplayground.entity.Board;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserBoard;
@@ -71,12 +72,12 @@ public class BoardService {
         return new BoardCreateResponseDto(board);
     }
 
-//    public List<BoardReadAllResponseDto> ReadAllBoard() {
-//        /**
-//         * 스트림 사용 Stream <Board> -> Stream <BoardReadAllResponseDto> -> List <BoardReadAllResponseDto>
-//         */
-//        return boardRepository.findAll().stream().map(BoardReadAllResponseDto::new).toList();
-//    }
+    public List<BoardReadAllResponseDto> ReadAllBoard() {
+        /**
+         * 스트림 사용 Stream <Board> -> Stream <BoardReadAllResponseDto> -> List <BoardReadAllResponseDto>
+         */
+        return boardRepository.findAll().stream().map(BoardReadAllResponseDto::new).toList();
+    }
 
 
 //    public Pageable getPageable(PageRequestDto pageRequestDto){
