@@ -1,69 +1,80 @@
-//package com.fanplayground.fanplayground.service;
-//
-//
-//import com.fanplayground.fanplayground.dto.PageRequestDto;
-//import com.fanplayground.fanplayground.dto.PostRequestDto;
-//
-//import com.fanplayground.fanplayground.entity.*;
-//import com.fanplayground.fanplayground.exception.TokenNotValidException;
-//import com.fanplayground.fanplayground.exception.UserNotFoundException;
-//import com.fanplayground.fanplayground.jwt.SecurityUtil;
-//import com.fanplayground.fanplayground.repository.FolderRepository;
-//import com.fanplayground.fanplayground.repository.PostRepository;
-//import com.fanplayground.fanplayground.repository.UserRepository;
-//import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.PageRequest;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.data.domain.Sort;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import java.util.List;
-//import java.util.stream.Collectors;
-//
-//@Service
-//@Slf4j
-//@RequiredArgsConstructor
-//public class PostService {
-//
-//    private final UserRepository userRepository;
-//    //멤버 변수 선언
+package com.fanplayground.fanplayground.service;
+
+
+import com.fanplayground.fanplayground.dto.*;
+import com.fanplayground.fanplayground.entity.*;
+import com.fanplayground.fanplayground.exception.UserNotFoundException;
+import com.fanplayground.fanplayground.jwt.SecurityUtil;
+import com.fanplayground.fanplayground.repository.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class BoardService {
+
+    private final UserRepository userRepository;
+    //멤버 변수 선언
 //    private final PostRepository postRepository;
 //    private final FolderRepository folderRepository;
-//
+    private final BoardRepository boardRepository;
+    private final UserBoardRepository userBoardRepository;
+
 //    public List<PostResponseDto> getFolder(Long id) {
 //        List<Post> postList = postRepository.findByFolderNumber(id);
 //        return postList.stream().map(PostResponseDto::new).toList();
 //    }
-//
-//    @Transactional
-//    public ResponseEntity<?> createPost(PostRequestDto requestDto, String tokenValue) {
-//        User principal = SecurityUtil.getPrincipal().get();
-//        String username = principal.getUsername();
-//
-//        User user = userRepository.findByUsername(username).orElseThrow(() ->
-//                new UserNotFoundException("회원을 찾을 수 없습니다.")
-//        );
-//
-//        //RequestDto -> Entity
-//        Post post = new Post(requestDto,username);
-//        user.addPostList(post);
-//
-//        //DB 저장
-//        Post savePost = postRepository.save(post);
-//
-//        //폴더 객체 저장
-//        folderRepository.save(new Folder(post,requestDto.getFolderNumber()));
-//
-//        //Entity -> ResponseDto
-//        return new ResponseEntity<>(new PostResponseDto(savePost),null, HttpStatus.OK);
-//    }
-//
-//
+
+    /**
+     * User 와 UserBoard 단방향 관계를 위해 사용
+     */
+    @Transactional
+    public BoardCreateResponseDto createBoard(BoardCreateRequestDto requestDto) {
+        Long userId= SecurityUtil.getPrincipal().get().getId();
+        /**
+         * user 객체 생성 및 영속 관계 성립
+         */
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new UserNotFoundException("회원을 찾을 수 없습니다.")
+        );
+
+        /**
+         * board 객체 생성 및 초기화
+         * ( User -> Board 단방향 관계 설정 + boardName, boardColor, boardInfo 설정 )
+         */
+        Board board = new Board(requestDto,user);
+
+        /**
+         * userBoard 객체 생성 및 초기화
+         * ( Board -> UserBoard 단방향 관계 설정 + User -> UserBoard 단방향 관계 설정 )
+         */
+        UserBoard userBoard = new UserBoard(user,board);
+
+        /**
+         * board 객체 및 userBoard 객체 저장
+         */
+        boardRepository.save(board);
+        userBoardRepository.save(userBoard);
+
+        /** Board Entity -> BoardResponseDto [ boardName, boardColor, boardInfo ]
+        * BoardResponseDto 객체 반환
+        */
+        return new BoardCreateResponseDto(board);
+    }
+
+    public List<BoardReadAllResponseDto> ReadAllBoard() {
+        /**
+         * 스트림 사용 Stream <Board> -> Stream <BoardReadAllResponseDto> -> List <BoardReadAllResponseDto>
+         */
+        return boardRepository.findAll().stream().map(BoardReadAllResponseDto::new).toList();
+    }
+
+
 //    public Pageable getPageable(PageRequestDto pageRequestDto){
 //        // 페이징 처리
 //        Sort.Direction direction = pageRequestDto.getIsAsc() ? Sort.Direction.ASC : Sort.Direction.DESC;
@@ -175,4 +186,6 @@
 //                new IllegalArgumentException("선택한 게시글은 존재하지 않습니다.")
 //        );
 //    }
-//}
+
+
+}

@@ -59,10 +59,10 @@ public class Post extends Timestamped{
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
     }
-    public void addCommentList(Comment comment){
-        this.comments.add(comment);
-        comment.setPost(this);
-    }
+//    public void addCommentList(Comment comment){
+//        this.comments.add(comment);
+//        comment.setPost(this);
+//    }
 
 
 }

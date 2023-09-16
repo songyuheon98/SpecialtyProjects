@@ -16,41 +16,34 @@ import java.util.List;
 @Setter
 @Table(name = "comment")
 @NoArgsConstructor
-public class Comment extends Timestamped {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long commentId;
 
-    @Column(name = "content", nullable = false)
-    private String content;
+    @Column(name = "commentInfo", nullable = false)
+    private String commentInfo;
 
-    @Column(name = "username", nullable = false)
-    private String username;
+    @Column(name = "userId", nullable = false)
+    private String userId;
 
-    @Column(name = "likecount", nullable = false)
-    private Long likeCount= 0L;
+    @Column(name = "nickName", nullable = false)
+    private String nickName;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
-    @JsonBackReference //
-    private List<Reply> replys = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "card_id")
+    private Card card;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post post;
 
-    public Comment(CommentRequestDto requestDto, String username) {
-        this.content = requestDto.getContent();
-        this.username = username;
-    }
 
-    public void addReplyList(Reply reply){
-        this.replys.add(reply);
-        reply.setComment(this);
-    }
 
-    public void update(CommentRequestDto requestDto) {
-        this.content = requestDto.getContent();
-    }
 
-    // post가 출력이 안되어야함. dto 하나 만들어서 post 빼고 입력받고 Responsedto에도 해당 dto list 가져옴
+//    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+//    @JsonBackReference //
+//    private List<Reply> replys = new ArrayList<>();
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "post_id")
+//    private Post post;
+
 }
