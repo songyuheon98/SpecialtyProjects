@@ -2,7 +2,6 @@ package com.fanplayground.fanplayground.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,11 +34,11 @@ public class User {
 
     @Column(name = "nickname", nullable = false)
     @NotBlank(message = "닉네임은 필수 값 입니다.")
-    private String nickname;
+    private String nickName;
 
-    @Column(name = "email", nullable = false)
-    @NotBlank(message = "닉네임은 필수 값 입니다.")
-    private String email;
+//    @Column(name = "email", nullable = false)
+//    @NotBlank(message = "닉네임은 필수 값 입니다.")
+//    private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonBackReference
@@ -51,11 +50,10 @@ public class User {
     private List<MiddleTable> middleTableList = new ArrayList<>();
 
     public User(String username, String password, UserRoleEnum role,String nickname) {
-        this.nickname = nickname;
+        this.nickName = nickname;
         this.username = username;
         this.password = password;
         this.role = role;
-        this.email = email;
     }
 
     public void addPostList(Post post){

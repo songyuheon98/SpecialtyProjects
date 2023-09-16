@@ -1,7 +1,10 @@
 package com.fanplayground.fanplayground.controller;
 
 
+import com.fanplayground.fanplayground.dto.LoginRequestDto;
 import com.fanplayground.fanplayground.dto.SignupRequestDto;
+import com.fanplayground.fanplayground.dto.UserUpdateRequestDto;
+import com.fanplayground.fanplayground.dto.UserUpdateResponseDto;
 import com.fanplayground.fanplayground.entity.Message;
 import com.fanplayground.fanplayground.service.UserService;
 import jakarta.validation.Valid;
@@ -24,5 +27,10 @@ public class UserController {
     @DeleteMapping("/auth/escape")
     public ResponseEntity<Message> escape(){
         return userService.escape();
+    }
+
+    @PutMapping("/auth/update")
+    public UserUpdateResponseDto update(@Valid @RequestBody UserUpdateRequestDto requestDto){
+        return userService.update(requestDto);
     }
 }

@@ -1,7 +1,10 @@
 package com.fanplayground.fanplayground.service;
 
 
+import com.fanplayground.fanplayground.dto.LoginRequestDto;
 import com.fanplayground.fanplayground.dto.SignupRequestDto;
+import com.fanplayground.fanplayground.dto.UserUpdateRequestDto;
+import com.fanplayground.fanplayground.dto.UserUpdateResponseDto;
 import com.fanplayground.fanplayground.entity.Message;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserRoleEnum;
@@ -14,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -30,9 +34,14 @@ public class UserService {
     public ResponseEntity<Message> signup(SignupRequestDto requestDto) {
 
         String username = requestDto.getUsername();
-        String nickname = requestDto.getNickname();
-        String password = passwordEncoder.encode(requestDto.getPassword());
-        String email = requestDto.getEmail();
+        String nickname = requestDto.getNickName();
+
+        if(!requestDto.getPassword1().equals(requestDto.getPassword2())){
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        String password = passwordEncoder.encode(requestDto.getPassword1());
+        //String email = requestDto.getEmail();
 
         // username 중복 확인
         Optional<User> checkUsername = userRepository.findByUsername(username);
@@ -67,5 +76,25 @@ public class UserService {
         // setSubject(username)
         //post 삭제
         return new ResponseEntity<>(msg, null, HttpStatus.OK);
+    }
+
+    @Transactional
+    public UserUpdateResponseDto update(UserUpdateRequestDto requestDto) {
+
+            Long user_id = SecurityUtil.getPrincipal().get().getId();
+
+            User user = userRepository.findById(user_id).orElseThrow(() ->
+                    new IllegalArgumentException("회원을 찾을 수 없습니다.")
+            );
+            // 사용자 ROLE 확인
+            UserRoleEnum role = UserRoleEnum.USER;
+            if(user.getRole().equals(UserRoleEnum.ADMIN))
+                throw new IllegalArgumentException("사용자 닉네임을 업데이트 할 수 있는 권한인 없습니다.");
+
+            user.setNickName(requestDto.getNickName());
+
+            return new UserUpdateResponseDto(user.getNickName(),"회원정보가 수정되었습니다");
+
+
     }
 }
