@@ -3,6 +3,7 @@ package com.fanplayground.fanplayground.service;
 import com.fanplayground.fanplayground.dto.BoardCreateRequestDto;
 import com.fanplayground.fanplayground.dto.BoardCreateResponseDto;
 import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
+import com.fanplayground.fanplayground.dto.PostResponseDto;
 import com.fanplayground.fanplayground.entity.Board;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserBoard;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -78,6 +80,30 @@ public class BoardService {
          */
         return boardRepository.findAll().stream().map(BoardReadAllResponseDto::new).toList();
     }
+
+    public BoardReadAllResponseDto ReadChoiceBoard(Long boardId) {
+        /**
+         * 스트림 사용 Stream <Board> -> Stream <BoardReadAllResponseDto> -> List <BoardReadAllResponseDto>
+         */
+        Board board= boardRepository.findById(boardId).orElseThrow(
+                ()-> new UserNotFoundException("선택하신 Board는 존재하지 않습니다.")
+        );
+        return new BoardReadAllResponseDto(board);
+
+    }
+
+    public List<BoardReadAllResponseDto> readAllUserBoard() {
+        try{
+            List<Long> userBoardIdList = SecurityUtil.getPrincipal().get().getBoards().stream().map(n->n.getBoardId()).toList();
+            List<Board> boards = boardRepository.findAll();
+            return boards.stream().filter(n->userBoardIdList.contains(n.getBoardId())).map(BoardReadAllResponseDto::new).toList();
+        }
+        catch (org.hibernate.LazyInitializationException e){
+            return new ArrayList<>();
+        }
+
+    }
+
 
 
 //    public Pageable getPageable(PageRequestDto pageRequestDto){

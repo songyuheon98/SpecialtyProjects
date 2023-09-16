@@ -3,6 +3,7 @@ package com.fanplayground.fanplayground.controller;
 import com.fanplayground.fanplayground.dto.BoardCreateRequestDto;
 import com.fanplayground.fanplayground.dto.BoardCreateResponseDto;
 import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
+import com.fanplayground.fanplayground.dto.PostResponseDto;
 import com.fanplayground.fanplayground.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -36,14 +37,16 @@ public class BoardController {
     }
 
 //
-//    // @RequestBody -> Json 기반의 메시지를 사용하는 요청의 경우
-//    @GetMapping("/post/{id}")
-//
-//    public List<PostResponseDto> getPost(@PathVariable Long id) {
-//
-//
-//        return postService.getPost(id);
-//    }
+    // @RequestBody -> Json 기반의 메시지를 사용하는 요청의 경우
+    @GetMapping("/board/{boardId}")
+    public BoardReadAllResponseDto ReadChoiceBoard(@PathVariable Long boardId) {
+        return boardService.ReadChoiceBoard(boardId);
+    }
+
+    @GetMapping("/board/userBoard")
+    public List<BoardReadAllResponseDto> ReadAllUserBoard() {
+        return boardService.readAllUserBoard();
+    }
 //
 //    //@PathVariable uri -> id
 //    @PutMapping("/post/{id}")
