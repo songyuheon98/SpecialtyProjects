@@ -1,17 +1,15 @@
 package com.fanplayground.fanplayground.service;
 
 
-import com.fanplayground.fanplayground.dto.LoginRequestDto;
 import com.fanplayground.fanplayground.dto.SignupRequestDto;
 import com.fanplayground.fanplayground.dto.UserUpdateRequestDto;
 import com.fanplayground.fanplayground.dto.UserUpdateResponseDto;
-import com.fanplayground.fanplayground.entity.Message;
+import com.fanplayground.fanplayground.dto.MessageDto;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserRoleEnum;
 import com.fanplayground.fanplayground.exception.DuplicateUsernameException;
 import com.fanplayground.fanplayground.jwt.SecurityUtil;
 import com.fanplayground.fanplayground.repository.UserRepository;
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +29,7 @@ public class UserService {
     // ADMIN_TOKEN
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
-    public ResponseEntity<Message> signup(SignupRequestDto requestDto) {
+    public ResponseEntity<MessageDto> signup(SignupRequestDto requestDto) {
 
         String username = requestDto.getUsername();
         String nickname = requestDto.getNickName();
@@ -62,15 +60,15 @@ public class UserService {
         User user = new User(username, password, role,nickname);
         userRepository.save(user);
 
-        Message msg = new Message("회원가입 성공",200);
+        MessageDto msg = new MessageDto("회원가입 성공");
         return new ResponseEntity<>(msg, null, HttpStatus.OK);
     }
-    public ResponseEntity<Message> escape(){
+    public ResponseEntity<MessageDto> escape(){
 
         String username = SecurityUtil.getPrincipal().get().getUsername();
 
         userRepository.delete(userRepository.findByUsername(username).orElse(null));
-        Message msg = new Message("회원 삭제 성공",200);
+        MessageDto msg = new MessageDto("회원 삭제 성공");
 
         // 해당 사용자(username)가 작성한 게시글인지 확인
         // setSubject(username)

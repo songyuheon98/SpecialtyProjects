@@ -1,6 +1,6 @@
 package com.fanplayground.fanplayground.exception;
 
-import com.fanplayground.fanplayground.entity.Message;
+import com.fanplayground.fanplayground.dto.MessageDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({DuplicateUsernameException.class})
-    public ResponseEntity<Message> handleException(DuplicateUsernameException ex) {
-        Message restApiException = new Message(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+    public ResponseEntity<MessageDto> handleException(DuplicateUsernameException ex) {
+        MessageDto restApiException = new MessageDto(ex.getMessage());
         return new ResponseEntity<>(
                 // HTTP body
                 restApiException,
@@ -21,8 +21,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({FormNotMatchException.class})
-    public ResponseEntity<Message> handleException(FormNotMatchException ex) {
-        Message restApiException = new Message(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+    public ResponseEntity<MessageDto> handleException(FormNotMatchException ex) {
+        MessageDto restApiException = new MessageDto(ex.getMessage());
         return new ResponseEntity<>(
                 // HTTP body
                 restApiException,
@@ -32,8 +32,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({TokenNotValidException.class})
-    public ResponseEntity<Message> handleException(TokenNotValidException ex) {
-        Message restApiException = new Message(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+    public ResponseEntity<MessageDto> handleException(TokenNotValidException ex) {
+        MessageDto restApiException = new MessageDto(ex.getMessage());
         return new ResponseEntity<>(
                 // HTTP body
                 restApiException,
@@ -43,8 +43,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({UserNotFoundException.class})
-    public ResponseEntity<Message> handleException(IllegalArgumentException ex) {
-        Message restApiException = new Message(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+    public ResponseEntity<MessageDto> handleException(IllegalArgumentException ex) {
+        MessageDto restApiException = new MessageDto(ex.getMessage());
         return new ResponseEntity<>(
                 // HTTP body
                 restApiException,
@@ -54,8 +54,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({WriterNotMatchException.class})
-    public ResponseEntity<Message> handleException(WriterNotMatchException ex) {
-        Message restApiException = new Message(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+    public ResponseEntity<MessageDto> handleException(WriterNotMatchException ex) {
+        MessageDto restApiException = new MessageDto(ex.getMessage());
         return new ResponseEntity<>(
                 // HTTP body
                 restApiException,
