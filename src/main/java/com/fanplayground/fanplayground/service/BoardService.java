@@ -205,6 +205,11 @@ public class BoardService {
         Board inviteBoard = boardRepository.findById(requestDto.getBoardId()).orElseThrow(
                 ()-> new UserNotFoundException("초대할 보드를 찾을 수 없습니다."));
 
+        if(LoginUser.getRole().equals("ROLE_ADMIN")) {
+            userBoardRepository.save(new UserBoard(inviteUser.getId(), inviteBoard.getBoardId()));
+            return new BoardInviteResponseDto("초대 되었습니다.");
+        }
+
         /**
          * 초대할 보드에 대한 권한이 있는지 여부를 확인
          */
@@ -231,6 +236,14 @@ public class BoardService {
                 ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
         );
 
+        if(LoginUser.getRole().equals("ROLE_ADMIN")) {
+            board.update(requestDto);
+            return new BoardInviteResponseDto("수정되었습니다.");
+        }
+
+        /**
+         * 로그인 회원이 해당 보드에 대한 수정할 권한이 있는지 여부 확인
+         */
         int check = authority(LoginUser,new BoardInviteRequestDto(boardId,LoginUser.getUsername()));
         if(check==1)
             board.update(requestDto);
@@ -250,6 +263,11 @@ public class BoardService {
         User LoginUser = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
                 ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
         );
+        if(LoginUser.getRole().equals("ROLE_ADMIN")) {
+            boardRepository.delete(board);
+            return new BoardInviteResponseDto("보드가 삭제되었습니다.");
+        }
+
 
         if(LoginUser.getBoards().stream().map(n->n.getBoardId()).toList().contains(boardId)) {
             boardRepository.delete(board);
