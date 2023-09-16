@@ -52,18 +52,7 @@ public class User {
     @JsonBackReference
     private List<UserBoard> userBoards = new ArrayList<>();
 
-//    @Column(name = "email", nullable = false)
-//    @NotBlank(message = "닉네임은 필수 값 입니다.")
-//    private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    @JsonBackReference
-    private List<Post> posts = new ArrayList<>();
-
-    // folder : user = n : m
-    @OneToMany(mappedBy = "user")
-    @JsonBackReference
-    private List<MiddleTable> middleTableList = new ArrayList<>();
 
     public User(String username, String password, UserRoleEnum role,String nickname) {
         this.nickName = nickname;
@@ -72,10 +61,6 @@ public class User {
         this.role = role;
     }
 
-    public void addPostList(Post post){
-        this.posts.add(post);
-        post.setUser(this);
-    }
     public void addBoardList(Board board){
         this.boards.add(board);
     }
