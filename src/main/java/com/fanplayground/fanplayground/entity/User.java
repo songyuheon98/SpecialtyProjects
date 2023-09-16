@@ -36,6 +36,22 @@ public class User {
     @NotBlank(message = "닉네임은 필수 값 입니다.")
     private String nickName;
 
+    /**
+     * User : Board = 1 : n
+     */
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private List<Board> boards = new ArrayList<>();
+
+    /**
+     * User : userBoard = 1 : n
+     */
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private List<UserBoard> userBoards = new ArrayList<>();
+
 //    @Column(name = "email", nullable = false)
 //    @NotBlank(message = "닉네임은 필수 값 입니다.")
 //    private String email;
@@ -60,5 +76,12 @@ public class User {
         this.posts.add(post);
         post.setUser(this);
     }
+    public void addBoardList(Board board){
+        this.boards.add(board);
+    }
+    public void addUserBoardList(UserBoard userBoard){
+        this.userBoards.add(userBoard);
+    }
+
 }
 
