@@ -1,0 +1,28 @@
+### Sign Up
+POST localhost:8080/api/auth/signup
+{
+"username": "bin0010",
+"password1": "Bin@12345",
+  "password2": "Bin@12345",
+    "nickName" : "nickname"
+}
+
+### Login
+POST localhost:8080/api/auth/login
+{
+"username": "bin0009",
+"password": "Bin@12345"
+}
+
+### Escape
+DELETE localhost:8080/api/auth/escape
+{}
+
+### Update
+PUT localhost:8080/api/auth/update
+{
+"nickName": "nickname 수정"
+}
+
+###
+
