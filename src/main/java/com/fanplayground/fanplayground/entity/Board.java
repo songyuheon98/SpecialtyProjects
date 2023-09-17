@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "board")
 @NoArgsConstructor
 public class Board {
-
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
