@@ -1,5 +1,6 @@
 package com.fanplayground.fanplayground.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -46,12 +47,5 @@ public class Card {
     @JoinColumn(name = "column_id")
     private BoardColumn boardColumn;
 
-    /**
-     * Card : Comment = 1 : n
-     */
-//    @OneToMany
-//    @JoinColumn(name = "card_id")
-//    @JsonBackReference
-//    private List<Comment> comments = new ArrayList<>();
 
 }

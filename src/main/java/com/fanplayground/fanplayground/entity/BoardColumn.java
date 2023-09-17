@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+
 public class BoardColumn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +24,9 @@ public class BoardColumn {
     @Column(name = "column_name", nullable = false)
     private String columnName;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "column_no")
     private Long columnNo;
 
-//
-//    /**
-//     * BoardColumn : Board = n : 1
-//     */
-//    @ManyToOne
-//    @JoinColumn(name = "board_id")
-//    private Board board;
 
     /**
      * BoardColumn : Card = 1 : n
@@ -55,7 +48,4 @@ public class BoardColumn {
         this.columnName = columnName;
     }
 
-//    public List<BoardColumn> moveBoardColumn(){
-//
-//    }
 }

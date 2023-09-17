@@ -36,25 +36,24 @@ public class User {
     @NotBlank(message = "닉네임은 필수 값 입니다.")
     private String nickName;
 
+
+    /**
+     * User : Board = 1 : n
+     */
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private List<Board> boards = new ArrayList<>();
 
+    /**
+     * User : userBoard = 1 : n
+     */
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private List<UserBoard> userBoards = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    @JsonBackReference
-    private List<Post> posts = new ArrayList<>();
-
-    // folder : user = n : m
-    @OneToMany(mappedBy = "user")
-    @JsonBackReference
-    private List<MiddleTable> middleTableList = new ArrayList<>();
 
 
     public User(String username, String password, UserRoleEnum role,String nickname) {
@@ -66,11 +65,10 @@ public class User {
 
     public void addBoardList(Board board){
         this.boards.add(board);
+
     }
     public void addUserBoardList(UserBoard userBoard){
         this.userBoards.add(userBoard);
     }
-
-
 }
 

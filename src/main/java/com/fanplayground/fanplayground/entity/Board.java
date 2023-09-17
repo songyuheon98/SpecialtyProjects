@@ -1,5 +1,4 @@
 package com.fanplayground.fanplayground.entity;
-
 import com.fanplayground.fanplayground.dto.BoardCreateRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -17,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Board {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
     private Long boardId;
 
@@ -41,7 +41,8 @@ public class Board {
     /**
      * Board : BoardColumn = 1 : n
      */
-    @OneToMany
+
+    @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "board_id")
     @JsonBackReference
     private List<BoardColumn> boardColumns = new ArrayList<>();
@@ -58,7 +59,13 @@ public class Board {
         this.userBoards.add(userBoard);
     }
 
+
     public void addUserBoardList(BoardColumn boardColumn) {
         this.boardColumns.add(boardColumn);
+  
+    public void update(BoardCreateRequestDto requestDto) {
+        this.boardName = requestDto.getBoardName();
+        this.boardColor = requestDto.getBoardColor();
+        this.boardInfo = requestDto.getBoardInfo();
     }
 }
