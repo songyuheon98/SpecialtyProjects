@@ -98,7 +98,10 @@ public class BoardService {
              * 인증 객체로 부터 객체가 만든 보드 리스트를 스트림을 통해 보드 ID 리스트로 변환
              * 만약 아무것도 없으면 비어있는 ArrayList 반환
              */
-            List<Long> userBoardIdList = SecurityUtil.getPrincipal().get().getBoards().stream().map(n->n.getBoardId()).toList();
+            User user = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
+                    ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
+            );
+            List<Long> userBoardIdList = user.getBoards().stream().map(n->n.getBoardId()).toList();
             List<Board> boards = boardRepository.findAll();
             return boards.stream().filter(n->userBoardIdList.contains(n.getBoardId())).map(BoardReadAllResponseDto::new).toList();
         }

@@ -62,6 +62,7 @@ public class Board {
 
     public void addUserBoardList(BoardColumn boardColumn) {
         this.boardColumns.add(boardColumn);
+    }      
   
     public void update(BoardCreateRequestDto requestDto) {
         this.boardName = requestDto.getBoardName();

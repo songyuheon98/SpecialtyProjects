@@ -24,10 +24,10 @@ public class ColumnController {
         return columnService.updateBoardColumn(requestDto);
     }
 
-    @PutMapping("/column")
-    public List<BoardColumnMoveResponseDto> moveBoardColumn(@RequestBody BoardColumnMoveRequestDto boardColumnMoveRequestDto){
-        return columnService.moveBoardColumn(boardColumnMoveRequestDto);
-    }
+//    @PutMapping("/column")
+//    public List<BoardColumnMoveResponseDto> moveBoardColumn(@RequestBody BoardColumnMoveRequestDto boardColumnMoveRequestDto){
+//        return columnService.moveBoardColumn(boardColumnMoveRequestDto);
+//    }
 
 
     @DeleteMapping("/column/{columnId}")
