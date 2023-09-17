@@ -36,6 +36,7 @@ public class User {
     @NotBlank(message = "닉네임은 필수 값 입니다.")
     private String nickName;
 
+
     /**
      * User : Board = 1 : n
      */
@@ -54,6 +55,7 @@ public class User {
 
 
 
+
     public User(String username, String password, UserRoleEnum role,String nickname) {
         this.nickName = nickname;
         this.username = username;
@@ -63,10 +65,10 @@ public class User {
 
     public void addBoardList(Board board){
         this.boards.add(board);
+
     }
     public void addUserBoardList(UserBoard userBoard){
         this.userBoards.add(userBoard);
     }
-
 }
 

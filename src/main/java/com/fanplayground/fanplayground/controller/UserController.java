@@ -1,11 +1,10 @@
 package com.fanplayground.fanplayground.controller;
 
 
-import com.fanplayground.fanplayground.dto.LoginRequestDto;
 import com.fanplayground.fanplayground.dto.SignupRequestDto;
 import com.fanplayground.fanplayground.dto.UserUpdateRequestDto;
 import com.fanplayground.fanplayground.dto.UserUpdateResponseDto;
-import com.fanplayground.fanplayground.entity.Message;
+import com.fanplayground.fanplayground.dto.MessageDto;
 import com.fanplayground.fanplayground.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +19,12 @@ public class UserController {
     }
     // ResponseEntity<Map>
     @PostMapping("/auth/signup")
-    public ResponseEntity<Message> signup(@Valid @RequestBody SignupRequestDto requestDto){
+    public ResponseEntity<MessageDto> signup(@Valid @RequestBody SignupRequestDto requestDto){
         return userService.signup(requestDto);
     }
 
     @DeleteMapping("/auth/escape")
-    public ResponseEntity<Message> escape(){
+    public ResponseEntity<MessageDto> escape(){
         return userService.escape();
     }
 

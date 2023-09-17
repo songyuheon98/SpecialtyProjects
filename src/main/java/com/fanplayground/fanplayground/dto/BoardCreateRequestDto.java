@@ -9,4 +9,5 @@ public class BoardCreateRequestDto {
     private String boardName;
     private String boardColor;
     private String boardInfo;
+
 }

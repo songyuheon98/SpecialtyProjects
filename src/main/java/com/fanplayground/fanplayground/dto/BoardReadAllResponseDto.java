@@ -16,11 +16,13 @@ public class BoardReadAllResponseDto {
     private String boardInfo;
     private List<UserBoard> userBoard;
     private List<BoardColumn> boardColumns;
+
     public BoardReadAllResponseDto(Board board){
         this.boardName = board.getBoardName();
         this.boardColor = board.getBoardColor();
         this.boardInfo = board.getBoardInfo();
         this.userBoard = board.getUserBoards();
         this.boardColumns = board.getBoardColumns();
+
     }
 }

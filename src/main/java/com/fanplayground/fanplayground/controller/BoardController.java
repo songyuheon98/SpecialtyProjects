@@ -35,7 +35,6 @@ public class BoardController {
         return boardService.ReadAllBoard();
     }
 
-//
     // @RequestBody -> Json 기반의 메시지를 사용하는 요청의 경우
     @GetMapping("/board/{boardId}")
     public BoardReadAllResponseDto ReadChoiceBoard(@PathVariable Long boardId) {
@@ -72,5 +71,4 @@ public class BoardController {
     }
 
 }
-
 

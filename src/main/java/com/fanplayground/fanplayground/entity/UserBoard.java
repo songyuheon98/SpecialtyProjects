@@ -20,6 +20,7 @@ public class UserBoard {
      * user : userBoard = 1 : n
      * userBoard : board = n : 1
      */
+
     @Column(name = "invite_user_id")
     private Long inviteUserId;
     @Column(name = "invite_board_id")
