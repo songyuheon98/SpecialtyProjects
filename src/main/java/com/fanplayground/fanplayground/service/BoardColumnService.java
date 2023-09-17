@@ -21,10 +21,11 @@ public class BoardColumnService {
     private final BoardColumnRepository boardColumnRepository;
     private final BoardRepository boardRepository;
 
+
     @Transactional
     public MessageDto createBoardColumn(BoardColumnRequestDto requestDto) {
         Board board = boardRepository.findById(requestDto.getBoardId()).orElseThrow(() ->
-                new IllegalArgumentException("존재하지 않는 Board ID 입니다."));
+                new IllegalArgumentException("해당 Board ID가 존재하지 않습니다."));
 
         BoardColumn boardColumn = new BoardColumn(requestDto);
 
