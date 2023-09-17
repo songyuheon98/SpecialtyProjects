@@ -1,11 +1,13 @@
 package com.fanplayground.fanplayground.entity;
 
 
+import com.fanplayground.fanplayground.dto.CardRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,17 +37,27 @@ public class Card {
     private String nickName;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deadLine;
 
     @Column(nullable = false)
     private Long cardNo;
 
-    /**
-     *  Card : BoardColumn = n : 1
-     */
-    @ManyToOne
-    @JoinColumn(name = "column_id")
-    private BoardColumn boardColumn;
 
+    public Card(CardRequestDto requestDto, String nickName) {
+        this.cardName = requestDto.getCardName();
+        this.cardInfo = requestDto.getCardInfo();
+        this.cardColor = requestDto.getCardColor();
+        this.nickName = nickName;
+        this.deadLine = requestDto.getDeadLine();
+        this.cardNo = requestDto.getCardNo();
+    }
 
+    public void update(CardRequestDto requestDto) {
+        this.cardName = requestDto.getCardName();
+        this.cardInfo = requestDto.getCardInfo();
+        this.cardColor = requestDto.getCardColor();
+        this.deadLine = requestDto.getDeadLine();
+        this.cardNo = requestDto.getCardNo();
+    }
 }

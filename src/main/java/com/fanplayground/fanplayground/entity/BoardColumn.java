@@ -31,10 +31,11 @@ public class BoardColumn {
     /**
      * BoardColumn : Card = 1 : n
      */
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "column_id")
     @JsonBackReference
     private List<Card> cards = new ArrayList<>();
+
 
     public BoardColumn(BoardColumnRequestDto columnRequestDto) {
         this.columnName = columnRequestDto.getColumnName();
@@ -48,4 +49,7 @@ public class BoardColumn {
         this.columnName = columnName;
     }
 
+    public void addCard(Card card) {
+        this.cards.add(card);
+    }
 }
