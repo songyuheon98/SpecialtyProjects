@@ -30,6 +30,11 @@ public class ColumnController {
 //    }
 
 
+    @PutMapping("/column/{boardId}")
+    public BoardColumnMoveResponseDto moveBoardColumn(@PathVariable Long boardId, @RequestBody BoardColumnMoveRequestDto requestDto){
+        return columnService.moveBoardColumn(boardId,requestDto);
+    }
+
     @DeleteMapping("/column/{columnId}")
     public MessageDto deleteBoardColumn(@PathVariable Long columnId){
         return columnService.deleteBoardColumn(columnId);
