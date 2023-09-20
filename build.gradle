@@ -6,6 +6,12 @@ plugins {
 
 group = 'com.fanPlayground'
 version = '0.0.1-SNAPSHOT'
+bootJar {
+	archiveBaseName.set('trelloServer')
+}
+jar{
+	archiveBaseName.set('trelloServer')
+}
 
 java {
 	sourceCompatibility = '17'
