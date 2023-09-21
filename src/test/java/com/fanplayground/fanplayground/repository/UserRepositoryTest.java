@@ -34,7 +34,7 @@ public class UserRepositoryTest {
     void UserRepository_연결_확인(){
         //given
         User user = new User();
-        user.setUsername("bin3333");
+        user.setUsername("bin0017");
         user.setPassword("Bin@12345");
         user.setNickName("nickname");
         user.setRole(UserRoleEnum.USER);
