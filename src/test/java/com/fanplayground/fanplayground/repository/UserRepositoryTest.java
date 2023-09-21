@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
 
 import java.util.Optional;
 
@@ -22,14 +23,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  */
 @TestPropertySource("classpath:test-application.properties")
 @DataJpaTest(showSql = true)
-@Sql("/sql/userRepositoryTestData.sql")
+@SqlGroup({
+        @Sql(value="/sql/userServiceTestData.sql",executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
+        @Sql(value="/sql/userServiceTestDataDelete.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+})
 public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
-    @Test
-    void asdf(){
-        assertThat(true).isTrue();
-    }
     @Test
     void UserRepository_연결_확인(){
         //given
