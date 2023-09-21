@@ -23,8 +23,9 @@ public class SignupRequestDto {
     //@Pattern(regexp = "^[0-9a-zA-Zㄱ-ㅎ가-힣]*$.{5,20}")
     private String nickName;
 
-
+    @Builder.Default
     private boolean admin = false;
+    @Builder.Default
     private String adminToken ="";
 
 }
