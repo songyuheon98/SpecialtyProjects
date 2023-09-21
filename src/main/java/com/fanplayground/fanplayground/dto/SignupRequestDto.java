@@ -1,11 +1,13 @@
 package com.fanplayground.fanplayground.dto;
 
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class SignupRequestDto {
 
     //@Pattern(regexp = "^[a-z][a-z0-9]{8,15}+$")

@@ -58,25 +58,6 @@ public class BoardColumnService {
         return new MessageDto("해당 컬럼명이 삭제되었습니다");
     }
 
-//    public List<BoardColumnMoveResponseDto> moveBoardColumn(BoardColumnMoveRequestDto boardColumnMoveRequestDto) {
-//        BoardColumn boardColumn = boardColumnRepository.findById(boardColumnMoveRequestDto.getColumnId()).orElseThrow(() ->
-//                new IllegalArgumentException("해당 컬럼은 존재하지 않습니다."));
-//
-//        /**
-//         * boardColumn 리스트
-//         */
-//        List<BoardColumn> moveTemp = boardColumnRepository.findAll();
-//
-//        /**
-//         * boardColumnMoveRequestDto -> list  columnNo
-//         */
-//        List<BoardColumnMoveRequestEtcDto> temp2 = boardColumnMoveRequestDto.getBoardColumnMoveRequestEtcDtos();
-//
-//        moveTemp.stream().map(n -> n.getColumnId().equals(temp2));
-//
-//
-//    }
-
     @Transactional
     public BoardColumnMoveResponseDto moveBoardColumn(Long boardId, BoardColumnMoveRequestDto requestDto) {
         Board board = boardRepository.findById(boardId).orElseThrow(() ->
