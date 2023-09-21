@@ -5,6 +5,7 @@ import com.fanplayground.fanplayground.entity.UserRoleEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Optional;
@@ -19,6 +20,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * @AutoConfigureTestDatabase 애너테이션을 사용하여 이러한 동작을 변경할 수 있다.
  * Plus showSql 속성을 true로 설정하면, SQL 쿼리가 로그로 출력한다.
  */
+@TestPropertySource("classpath:test-application.properties")
 @DataJpaTest(showSql = true)
 @Sql("/sql/userRepositoryTestData.sql")
 public class UserRepositoryTest {
