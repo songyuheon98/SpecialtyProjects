@@ -35,7 +35,7 @@ public class UserRepositoryTest {
         //given
         User user = new User();
         user.setId(21L);
-        user.setUsername("bin0017");
+        user.setUsername("bin0016");
         user.setPassword("Bin@12345");
         user.setNickName("nickname");
         user.setRole(UserRoleEnum.USER);
