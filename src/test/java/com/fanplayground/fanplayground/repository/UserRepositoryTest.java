@@ -30,22 +30,22 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
-//    @Test
-//    void UserRepository_연결_확인(){
-//        //given
-//        User user = new User();
-//        user.setUsername("bin0017");
-//        user.setPassword("Bin@12345");
-//        user.setNickName("nickname");
-//        user.setRole(UserRoleEnum.USER);
-//
-//        //when
-//        User result = userRepository.save(user);
-//
-//        //then
-//        assertThat(result).isNotNull();
-//
-//    }
+    @Test
+    void UserRepository_연결_확인(){
+        //given
+        User user = new User();
+        user.setUsername("bin3333");
+        user.setPassword("Bin@12345");
+        user.setNickName("nickname");
+        user.setRole(UserRoleEnum.USER);
+
+        //when
+        User result = userRepository.save(user);
+
+        //then
+        assertThat(result).isNotNull();
+
+    }
 
     @Test
     void UserRepository_findByUsername_User_객체_반환_동작_확인(){
