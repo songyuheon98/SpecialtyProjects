@@ -25,10 +25,6 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
     @Test
-    void asdf(){
-        assertThat(true).isTrue();
-    }
-    @Test
     void UserRepository_연결_확인(){
         //given
         User user = new User();
