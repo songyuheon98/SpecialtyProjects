@@ -29,7 +29,7 @@ jobs:
     # mysql
     - name: Wait for MySQL
       run: sleep 15
-    - name: stop defaul mysql
+    - name: stop default mysql
       run : sudo service mysql stop
     - uses: mirromutth/mysql-action@v1.1
       with:
