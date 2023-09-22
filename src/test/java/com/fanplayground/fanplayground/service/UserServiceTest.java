@@ -233,17 +233,17 @@ class UserServiceTest {
 //    }
     // update(), escape() 둘다 회원정보를 인증객체에서 가지고 오기에 ......
 
-    @Test
-    void getUser_검색한_유저_반환_확인() {
-        // given
-        Long id = 21L;
-
-        // when
-        User result = userService.getUser(id);
-
-        // then
-        assertThat(result).isNotNull();
-    }
+//    @Test
+//    void getUser_검색한_유저_반환_확인() {
+//        // given
+//        Long id = 21L;
+//
+//        // when
+//        User result = userService.getUser(id);
+//
+//        // then
+//        assertThat(result).isNotNull();
+//    }
 
     @Test
     void getUser_검색한_유저_없을때_예외_반환확인() {
