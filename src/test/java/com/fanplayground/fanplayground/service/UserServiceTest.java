@@ -201,8 +201,7 @@ class UserServiceTest {
                 .password1("Bin@12345")
                 .password2("Bin@12346")
                 .nickName("nickname")
-                .admin(true)
-                .adminToken("AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC").build();
+                        .build();
 
         //when
         //then
