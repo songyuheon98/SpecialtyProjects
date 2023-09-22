@@ -1,16 +1,13 @@
 package com.fanplayground.fanplayground.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BoardInviteRequestDto {
     private Long boardId;
     private String userName;
-    public BoardInviteRequestDto(Long boardId, String userName) {
-        this.boardId = boardId;
-        this.userName = userName;
-    }
-
 }

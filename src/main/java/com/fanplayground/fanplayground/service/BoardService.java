@@ -3,17 +3,12 @@ package com.fanplayground.fanplayground.service;
 
 
 import com.fanplayground.fanplayground.dto.*;
-import com.fanplayground.fanplayground.entity.*;
 import com.fanplayground.fanplayground.exception.UserNotFoundException;
 import com.fanplayground.fanplayground.jwt.SecurityUtil;
-import com.fanplayground.fanplayground.repository.*;
 
-import com.fanplayground.fanplayground.dto.*;
 import com.fanplayground.fanplayground.entity.Board;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserBoard;
-import com.fanplayground.fanplayground.exception.UserNotFoundException;
-import com.fanplayground.fanplayground.jwt.SecurityUtil;
 import com.fanplayground.fanplayground.repository.BoardRepository;
 import com.fanplayground.fanplayground.repository.UserBoardRepository;
 import com.fanplayground.fanplayground.repository.UserRepository;
@@ -22,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import java.util.List;
 
@@ -47,10 +41,7 @@ public class BoardService {
         /**
          * user 객체 생성 및 영속 관계 성립
          */
-        User user = userRepository.findById(userId).orElseThrow(
-                ()-> new UserNotFoundException("회원을 찾을 수 없습니다.")
-        );
-
+        User user = getUser(userId);
         /**
          * board 객체 생성 및 초기화
          * ( User -> Board 단방향 관계 설정 + boardName, boardColor, boardInfo 설정 )
@@ -75,13 +66,20 @@ public class BoardService {
         return new BoardCreateResponseDto(board);
     }
 
-    public List<BoardReadAllResponseDto> ReadAllBoard() {
+    private User getUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new UserNotFoundException("회원을 찾을 수 없습니다.")
+        );
+        return user;
+    }
+
+    public List<BoardReadAllResponseDto> readAllBoard() {
         /**
          * 스트림 사용 Stream <Board> -> Stream <BoardReadAllResponseDto> -> List <BoardReadAllResponseDto>
          */
         return boardRepository.findAll().stream().map(BoardReadAllResponseDto::new).toList();
     }
-    public BoardReadAllResponseDto ReadChoiceBoard(Long boardId) {
+    public BoardReadAllResponseDto readChoiceBoard(Long boardId) {
         /**
          * 스트림 사용 Stream <Board> -> Stream <BoardReadAllResponseDto> -> List <BoardReadAllResponseDto>
          */
@@ -98,9 +96,7 @@ public class BoardService {
              * 인증 객체로 부터 객체가 만든 보드 리스트를 스트림을 통해 보드 ID 리스트로 변환
              * 만약 아무것도 없으면 비어있는 ArrayList 반환
              */
-            User user = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
-                    ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
-            );
+            User user = LoginUserExistCheck();
             List<Long> userBoardIdList = user.getBoards().stream().map(n->n.getBoardId()).toList();
             List<Board> boards = boardRepository.findAll();
             return boards.stream().filter(n->userBoardIdList.contains(n.getBoardId())).map(BoardReadAllResponseDto::new).toList();
@@ -112,9 +108,7 @@ public class BoardService {
     }
 
     public List<BoardReadAllResponseDto> readAllUserEnableBoard() {
-        User user = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
-                ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
-        );
+        User user = LoginUserExistCheck();
         /**
          * Add All 하는 과정에서 NullPointerException 발생 가능성 없애기 위해 사용
          */
@@ -169,6 +163,14 @@ public class BoardService {
         return boards.stream().filter(n-> enableUserBoardIdList.contains(n.getBoardId())).map(BoardReadAllResponseDto::new).toList();
     }
 
+    @Transactional
+    public User LoginUserExistCheck() {
+        User user = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
+                ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
+        );
+        return user;
+    }
+
     /**
      * 보드에 대한 권한이 있는지 여부를 확인
      * @param LoginUser : 인증 객체
@@ -199,9 +201,7 @@ public class BoardService {
         return check;
     }
     public BoardInviteResponseDto boardInvite(BoardInviteRequestDto requestDto) {
-        User LoginUser = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
-                ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
-        );
+        User LoginUser = LoginUserExistCheck();
 
         /**
          * 초대할 회원이 존재하는지 확인
@@ -216,9 +216,9 @@ public class BoardService {
         Board inviteBoard = boardRepository.findById(requestDto.getBoardId()).orElseThrow(
                 ()-> new UserNotFoundException("초대할 보드를 찾을 수 없습니다."));
 
-        if(LoginUser.getRole().equals("ROLE_ADMIN")) {
+        if(LoginUser.getRole().getAuthority().equals("ROLE_ADMIN")) {
             userBoardRepository.save(new UserBoard(inviteUser.getId(), inviteBoard.getBoardId()));
-            return new BoardInviteResponseDto("초대 되었습니다.");
+            return new BoardInviteResponseDto("관리자 권한으로 초대 되었습니다.");
         }
 
         /**
@@ -243,9 +243,7 @@ public class BoardService {
         /**
          * 로그인 회원에 대한 정보 확인
          */
-        User LoginUser = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
-                ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
-        );
+        User LoginUser = LoginUserExistCheck();
 
         if(LoginUser.getRole().equals("ROLE_ADMIN")) {
             board.update(requestDto);
@@ -271,9 +269,7 @@ public class BoardService {
         /**
          * 로그인 회원이 해당 보드에 대한 삭제할 권한이 있는지 여부 확인
          */
-        User LoginUser = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
-                ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
-        );
+        User LoginUser = LoginUserExistCheck();
         if(LoginUser.getRole().equals("ROLE_ADMIN")) {
             boardRepository.delete(board);
             return new BoardInviteResponseDto("보드가 삭제되었습니다.");

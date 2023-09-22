@@ -50,10 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
         @Sql(value="/sql/userServiceTestData.sql",executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(value="/sql/userServiceTestDataDelete.sql",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 })
-@AutoConfigureMockMvc
 class UserServiceTest {
-    @Autowired
-    private MockMvc mockMvc;
 
     @Autowired
     private UserRepository userRepository;
