@@ -254,9 +254,11 @@ public class BoardService {
          * 로그인 회원이 해당 보드에 대한 수정할 권한이 있는지 여부 확인
          */
         int check = authority(LoginUser,new BoardInviteRequestDto(boardId,LoginUser.getUsername()));
-        if(check==1)
+        if(check==1) {
             board.update(requestDto);
-        return new BoardInviteResponseDto("수정되었습니다.");
+            return new BoardInviteResponseDto("수정되었습니다.");
+        }
+        return new BoardInviteResponseDto("당신에게는 권한이 없습니다.");
     }
 
     public BoardInviteResponseDto deleteBoard(Long boardId) {

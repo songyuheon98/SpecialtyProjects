@@ -48,9 +48,7 @@ public class BoardController {
 //
     //@PathVariable uri -> id
     @PutMapping("/board/{boardId}")
-    public BoardInviteResponseDto boardUpdate(@PathVariable Long
-
-                                                          boardId, @RequestBody BoardCreateRequestDto requestDto){
+    public BoardInviteResponseDto boardUpdate(@PathVariable Long boardId, @RequestBody BoardCreateRequestDto requestDto){
         return boardService.boardUpdate(boardId,requestDto);
     }
 //
