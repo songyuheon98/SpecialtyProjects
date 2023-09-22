@@ -1,11 +1,13 @@
 package com.fanplayground.fanplayground.dto;
 
 import com.fanplayground.fanplayground.entity.Board;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BoardCreateResponseDto {
     private String boardName;
     private String boardColor;

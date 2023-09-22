@@ -3,17 +3,12 @@ package com.fanplayground.fanplayground.service;
 
 
 import com.fanplayground.fanplayground.dto.*;
-import com.fanplayground.fanplayground.entity.*;
 import com.fanplayground.fanplayground.exception.UserNotFoundException;
 import com.fanplayground.fanplayground.jwt.SecurityUtil;
-import com.fanplayground.fanplayground.repository.*;
 
-import com.fanplayground.fanplayground.dto.*;
 import com.fanplayground.fanplayground.entity.Board;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserBoard;
-import com.fanplayground.fanplayground.exception.UserNotFoundException;
-import com.fanplayground.fanplayground.jwt.SecurityUtil;
 import com.fanplayground.fanplayground.repository.BoardRepository;
 import com.fanplayground.fanplayground.repository.UserBoardRepository;
 import com.fanplayground.fanplayground.repository.UserRepository;
@@ -22,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import java.util.List;
 
@@ -81,7 +75,7 @@ public class BoardService {
          */
         return boardRepository.findAll().stream().map(BoardReadAllResponseDto::new).toList();
     }
-    public BoardReadAllResponseDto ReadChoiceBoard(Long boardId) {
+    public BoardReadAllResponseDto readChoiceBoard(Long boardId) {
         /**
          * 스트림 사용 Stream <Board> -> Stream <BoardReadAllResponseDto> -> List <BoardReadAllResponseDto>
          */
