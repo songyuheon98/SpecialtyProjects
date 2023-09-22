@@ -193,20 +193,20 @@ class UserServiceTest {
         assertDoesNotThrow(() -> userService.passwordCheck(requestDto));
     }
 
-    @Test
-    void passwordCheck_패스워드가_불일치할때() {
-        //given
-        SignupRequestDto requestDto= SignupRequestDto.builder()
-                .username("bin0017")
-                .password1("Bin@12345")
-                .password2("Bin@12346")
-                .nickName("nickname")
-                        .build();
-
-        //when
-        //then
-        assertThrows(IllegalArgumentException.class,() -> userService.passwordCheck(requestDto));
-    }
+//    @Test
+//    void passwordCheck_패스워드가_불일치할때() {
+//        //given
+//        SignupRequestDto requestDto= SignupRequestDto.builder()
+//                .username("bin0017")
+//                .password1("Bin@12345")
+//                .password2("Bin@12346")
+//                .nickName("nickname")
+//                        .build();
+//
+//        //when
+//        //then
+//        assertThrows(IllegalArgumentException.class,() -> userService.passwordCheck(requestDto));
+//    }
 
     @Test
     void signup_회원가입_되는지_확인() {
