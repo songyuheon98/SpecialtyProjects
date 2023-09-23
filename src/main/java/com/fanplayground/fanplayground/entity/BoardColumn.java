@@ -3,9 +3,7 @@ package com.fanplayground.fanplayground.entity;
 import com.fanplayground.fanplayground.dto.BoardColumnRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@Builder
+@AllArgsConstructor
 public class BoardColumn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
