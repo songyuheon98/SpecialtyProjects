@@ -22,7 +22,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final CardRepository cardRepository;
 
-    public ResponseEntity creatComment(CommentRequestDto requestDto, User user) {
+    public Comment creatComment(CommentRequestDto requestDto, User user) {
         log.info("댓글 생성");
         // 카드 존재 여부 확인
         hasCard(requestDto.getCardId().getCardId());
@@ -31,45 +31,36 @@ public class CommentService {
 
         Comment saveComment = commentRepository.save(comment);
 
-        return new ResponseEntity(saveComment, null, 200);
+        return saveComment;
     }
 
     @Transactional
-    public ResponseEntity updateComment(CommentRequestDto requestDto, User user) {
+    public Comment updateComment(CommentRequestDto requestDto, User user) {
         log.info("댓글 수정");
 
-        if (user.getRole().toString().equals("ADMIN")) {
-            log.info("수정 admin으로 입장");
-            Comment adminComment = commentRepository.findByCommentId(requestDto.getCardId().getCardId()).orElseThrow();
-            adminComment.update(requestDto, user);
-            return new ResponseEntity(adminComment, null, 200);
-        }
-
-
         // 댓글 존재확인
-        Comment comment = hasComment(requestDto.getCommentId(), user.getNickName());
+        Comment comment = hasComment(requestDto.getCommentId(), user.getNickName(), user.getRole().toString());
         comment.update(requestDto, user);
 
-        return new ResponseEntity(comment, null, 200);
+        return comment;
     }
 
-    public ResponseEntity deleteComment(Long commentId, User user) {
+    public String deleteComment(Long commentId, User user) {
         log.info("댓글 삭제");
-        if (user.getRole().toString().equals("ADMIN")) {
-            log.info("삭제 admin으로 입장");
-            Comment adminComment = commentRepository.findByCommentId(commentId).orElseThrow();
-            commentRepository.delete(adminComment);
-            return new ResponseEntity("admin이 댓글 삭제 성공", null, 200);
-        }
 
         // 댓글 존재 확인
-        Comment comment = hasComment(commentId, user.getNickName());
+        Comment comment = hasComment(commentId, user.getNickName(), user.getRole().toString());
         commentRepository.delete(comment);
-        return new ResponseEntity("댓글 삭제 성공", null, 200);
+        return "succ";
     }
 
 
-    private Comment hasComment(Long commentId, String nickName) {
+    private Comment hasComment(Long commentId, String nickName, String role) {
+        if(role.equals("ADMIN")){
+            return commentRepository.findByCommentId(commentId).orElseThrow(
+                    () -> new NullPointerException("해당 댓글이 존재하지 않습니다.")
+            );
+        }
         return commentRepository.findByCommentIdAndNickName(commentId, nickName).orElseThrow(() ->
                 new NullPointerException("해당 댓글이 존재하지 않습니다")
         );
