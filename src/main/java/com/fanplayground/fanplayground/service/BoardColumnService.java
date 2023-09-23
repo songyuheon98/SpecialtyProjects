@@ -62,7 +62,7 @@ public class BoardColumnService {
     public BoardColumnMoveResponseDto moveBoardColumn(Long boardId, BoardColumnMoveRequestDto requestDto) {
         Board board = boardRepository.findById(boardId).orElseThrow(() ->
                 new IllegalArgumentException("해당 Board ID가 존재하지 않습니다."));
-        List<Integer> columnsNos = requestDto.getColumnsNos();
+        List<Long> columnsNos = requestDto.getColumnsNos();
 
         for (int i = 0; i < board.getBoardColumns().size(); i++)
             board.getBoardColumns().get(i).setColumnNo(Long.valueOf(columnsNos.get(i)));

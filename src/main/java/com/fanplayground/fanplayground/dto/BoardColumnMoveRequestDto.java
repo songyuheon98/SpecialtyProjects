@@ -1,14 +1,14 @@
 package com.fanplayground.fanplayground.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class BoardColumnMoveRequestDto {
-    private List<Integer> columnsNos;
+    private List<Long> columnsNos;
 }
