@@ -31,7 +31,7 @@ public class BoardController {
 
     @GetMapping("/board") // Slice
     public List<BoardReadAllResponseDto> ReadAllBoard(){
-        return boardService.ReadAllBoard();
+        return boardService.readAllBoard();
     }
 
     // @RequestBody -> Json 기반의 메시지를 사용하는 요청의 경우

@@ -69,7 +69,7 @@ public class BoardService {
         return new BoardCreateResponseDto(board);
     }
 
-    public List<BoardReadAllResponseDto> ReadAllBoard() {
+    public List<BoardReadAllResponseDto> readAllBoard() {
         /**
          * 스트림 사용 Stream <Board> -> Stream <BoardReadAllResponseDto> -> List <BoardReadAllResponseDto>
          */
@@ -210,9 +210,9 @@ public class BoardService {
         Board inviteBoard = boardRepository.findById(requestDto.getBoardId()).orElseThrow(
                 ()-> new UserNotFoundException("초대할 보드를 찾을 수 없습니다."));
 
-        if(LoginUser.getRole().equals("ROLE_ADMIN")) {
+        if(LoginUser.getRole().getAuthority().equals("ROLE_ADMIN")) {
             userBoardRepository.save(new UserBoard(inviteUser.getId(), inviteBoard.getBoardId()));
-            return new BoardInviteResponseDto("초대 되었습니다.");
+            return new BoardInviteResponseDto("관리자 권한으로 초대 되었습니다.");
         }
 
         /**
@@ -241,18 +241,20 @@ public class BoardService {
                 ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
         );
 
-        if(LoginUser.getRole().equals("ROLE_ADMIN")) {
+        if(LoginUser.getRole().getAuthority().equals("ROLE_ADMIN")) {
             board.update(requestDto);
-            return new BoardInviteResponseDto("수정되었습니다.");
+            return new BoardInviteResponseDto("관리자 권한으로 수정되었습니다.");
         }
 
         /**
          * 로그인 회원이 해당 보드에 대한 수정할 권한이 있는지 여부 확인
          */
         int check = authority(LoginUser,new BoardInviteRequestDto(boardId,LoginUser.getUsername()));
-        if(check==1)
+        if(check==1) {
             board.update(requestDto);
-        return new BoardInviteResponseDto("수정되었습니다.");
+            return new BoardInviteResponseDto("수정되었습니다.");
+        }
+        return new BoardInviteResponseDto("당신에게는 권한이 없습니다.");
     }
 
     public BoardInviteResponseDto deleteBoard(Long boardId) {
@@ -268,9 +270,9 @@ public class BoardService {
         User LoginUser = userRepository.findById(SecurityUtil.getPrincipal().get().getId()).orElseThrow(
                 ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
         );
-        if(LoginUser.getRole().equals("ROLE_ADMIN")) {
+        if(LoginUser.getRole().getAuthority().equals("ROLE_ADMIN")) {
             boardRepository.delete(board);
-            return new BoardInviteResponseDto("보드가 삭제되었습니다.");
+            return new BoardInviteResponseDto("관리자 권한으로 보드가 삭제되었습니다.");
         }
 
 

@@ -1,36 +1,21 @@
 package com.fanplayground.fanplayground.controller;
 
 import com.fanplayground.fanplayground.dto.*;
-import com.fanplayground.fanplayground.entity.Board;
-import com.fanplayground.fanplayground.entity.User;
-import com.fanplayground.fanplayground.entity.UserRoleEnum;
-import com.fanplayground.fanplayground.security.UserDetailsImpl;
 import com.fanplayground.fanplayground.service.BoardService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.h2.index.IndexCondition.get;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,22 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 class BoardControllerTest {
-
-//    @BeforeEach
-//    void securityUserTest() {
-//        User user = new User();
-//        user.setId(21L);
-//        user.setNickName("nickname");
-//        user.setUsername("bin0016");
-//        user.setPassword("Bin@12345");
-//        user.setRole(UserRoleEnum.USER);
-//
-//        UserDetailsImpl userDetails = new UserDetailsImpl(user);
-//        Authentication authentication =
-//                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//    }
 
     @Autowired
     public MockMvc mockMvc;
@@ -95,8 +64,6 @@ class BoardControllerTest {
                 .andExpect(jsonPath("$.boardInfo").value("boardInfo"));
     }
 
-
-
     @Test
     void readAllBoard() throws Exception {
         // given
@@ -109,7 +76,7 @@ class BoardControllerTest {
         );
 
         // when
-        when(boardService.ReadAllBoard()).thenReturn(responseDto);
+        when(boardService.readAllBoard()).thenReturn(responseDto);
 
         // then
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/api/board"))

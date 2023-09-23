@@ -5,9 +5,11 @@ import com.fanplayground.fanplayground.security.UserDetailsImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class SecurityUtil {
     public static Optional<User> getPrincipal() {
         // of() 인자로서 null 값을 받지 않는다.
