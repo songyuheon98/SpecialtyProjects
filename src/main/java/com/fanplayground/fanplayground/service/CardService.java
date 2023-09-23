@@ -22,61 +22,59 @@ public class CardService {
 
 
     @Transactional
-    public ResponseEntity createCard(CardRequestDto requestDto, User user) {
+    public Card createCard(CardRequestDto requestDto, User user) {
         log.info("카드 생성");
         Card card = new Card(requestDto, user.getNickName());
+        System.out.println("card.getCardName() = " + card.getCardName());
         Card saveCard = cardRepository.save(card);
+        System.out.println("saveCard.getCardName() = " + saveCard.getCardName());
+        System.out.println("requestDto.getColumnId() = " + requestDto.getColumnId());
 
-        BoardColumn boardColumn = boardColumnRepository.findByColumnId(requestDto.getColumnId()).orElseThrow(() ->
-                new NullPointerException("해당 컬럼은 없음")
-        );
-        boardColumn.addCard(saveCard);
+        isValueColumn(requestDto,saveCard);
 
-
-        return new ResponseEntity(saveCard, null, 200);
+        log.info("카드 생성 db 저장");
+        return saveCard;
     }
 
     @Transactional
-    public ResponseEntity updateCard(CardRequestDto requestDto, User user) {
+    public void isValueColumn (CardRequestDto requestDto,Card card){
+        BoardColumn boardColumn = boardColumnRepository.findByColumnId(requestDto.getColumnId()).orElseThrow(() ->
+                new NullPointerException("해당 컬럼은 없음")
+        );
+
+        boardColumn.addCard(card);
+    }
+
+    @Transactional
+    public Card updateCard(CardRequestDto requestDto, User user) {
         log.info("카드 수정");
-        if (user.getRole().toString().equals("ADMIN")) {
-            log.info("admin수정");
+        Card card = findCard(user.getNickName(), requestDto.getCardId(), user.getRole().toString());
 
-            Card card = cardRepository.findByCardId(requestDto.getColumnId()).orElseThrow(() ->
-                    new NullPointerException("발견값 없음")
-            );
-            card.update(requestDto);
-            return new ResponseEntity(card, null, 200);
-        }
-        Card card = findCard(user.getNickName(), requestDto.getColumnId());
         card.update(requestDto);
-        return new ResponseEntity(card, null, 200);
+        log.info("");
+        return card;
     }
 
-    public ResponseEntity deleteCard(Long cardId, User user) {
+    public String deleteCard(Long cardId, User user) {
         log.info("카드 삭제");
-        if (user.getRole().toString().equals("ADMIN")) {
-            log.info("admin삭제");
+        Card card = findCard(user.getNickName(), cardId, user.getRole().toString());
 
-            Card card = cardRepository.findByCardId(cardId).orElseThrow(() ->
-                    new NullPointerException("발견값 없음")
-            );
-            cardRepository.delete(card);
-            return new ResponseEntity("삭제 성공", null, 200);
-        }
-        Card card = findCard(user.getNickName(), cardId);
         cardRepository.delete(card);
-        return new ResponseEntity("삭제 성공", null, 200);
+        return "succ";
     }
 
-    private Card findCard(String nickName, Long cardId) {
+    private Card findCard(String nickName, Long cardId, String role) {
 
+        if (role.equals("ADMIN")) {
+            return cardRepository.findByCardId(cardId).orElseThrow(
+                    () -> new NullPointerException("발견값 없음")
+            );
+        }
         return cardRepository.findByCardIdAndNickName(cardId, nickName).orElseThrow(
                 () -> new NullPointerException("해당카드는 없음")
         );
 
     }
-
 
 }
 
