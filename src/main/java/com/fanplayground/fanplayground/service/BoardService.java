@@ -271,7 +271,7 @@ public class BoardService {
                 ()-> new UserNotFoundException("로그인한 회원을 찾을 수 없습니다.")
         );
         if(LoginUser.getRole().getAuthority().equals("ROLE_ADMIN")) {
-            boardRepository.delete(board);
+//            boardRepository.delete(board);
             return new BoardInviteResponseDto("관리자 권한으로 보드가 삭제되었습니다.");
         }
 
