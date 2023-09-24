@@ -14,13 +14,6 @@ public class BoardController {
 
     private final BoardService boardService;
 
-//    // 게시글을 폴더명으로 조회
-//    @GetMapping("/folder/{id}")
-//    public List<PostResponseDto> getFolder(@PathVariable Long id){
-//        return postService.getFolder(id);
-//
-//    }
-
 
     // @RequestBody 는 Json 형식으로 넘겨주어야한다.
     @PostMapping("/board")
