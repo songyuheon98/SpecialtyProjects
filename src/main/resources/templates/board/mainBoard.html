@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카반 보드</title>
+  <style>
+    #board-list {
+      width: 20%;
+      float: left;
+      border-right: 1px solid #ccc;
+      height: 100vh;
+      overflow-y: scroll;
+    }
+    #board-content {
+      width: 80%;
+      float: left;
+      padding: 20px;
+    }
+    .board {
+      display: none;
+    }
+  </style>
+  <script>
+    function showBoard(boardId) {
+      const boards = document.querySelectorAll('.board');
+      boards.forEach(board => board.style.display = 'none');
+      document.getElementById(boardId).style.display = 'block';
+    }
+  </script>
+</head>
+<body>
+
+<div id="board-list">
+  <h2>보드 목록</h2>
+  <ul>
+    <li><a href="#" onclick="showBoard('board1')">보드 1</a></li>
+    <li><a href="#" onclick="showBoard('board2')">보드 2</a></li>
+    <li><a href="#" onclick="showBoard('board3')">보드 3</a></li>
+  </ul>
+</div>
+
+<div id="board-content">
+  <!-- 보드 1 -->
+  <div id="board1" class="board">
+    <!-- 여기에 보드 1의 컬럼과 카드를 작성 -->
+  </div>
+
+  <!-- 보드 2 -->
+  <div id="board2" class="board">
+    <!-- 여기에 보드 2의 컬럼과 카드를 작성 -->
+  </div>
+
+  <!-- 보드 3 -->
+  <div id="board3" class="board">
+    <!-- 여기에 보드 3의 컬럼과 카드를 작성 -->
+  </div>
+</div>
+
+</body>
+</html>
