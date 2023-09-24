@@ -20,4 +20,10 @@ public class UserWebController {
     public String updatePage() {
         return "/user/userUpdate";
     }
+
+    @GetMapping("/user/escape")
+    public String escapePage() {
+        return "/user/escape";
+    }
+
 }
