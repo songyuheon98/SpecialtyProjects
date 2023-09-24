@@ -18,7 +18,7 @@ public class UserWebController {
 
     @GetMapping("/user/update")
     public String updatePage() {
-        return "/user/userUpdate";
+        return "/user/update";
     }
 
     @GetMapping("/user/escape")
