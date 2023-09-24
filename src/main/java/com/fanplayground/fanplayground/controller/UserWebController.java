@@ -11,6 +11,11 @@ public class UserWebController {
         return "/user/signup";
     }
 
+    @GetMapping("/user/login")
+    public String loginPage() {
+        return "/user/login";
+    }
+
     @GetMapping("/user/update")
     public String updatePage() {
         return "/user/userUpdate";
