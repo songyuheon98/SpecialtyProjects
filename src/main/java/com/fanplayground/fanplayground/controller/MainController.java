@@ -23,12 +23,12 @@ public class MainController {
 
     }
 
-    @GetMapping("/board/{boardName}")
-    public String getBoard(@PathVariable String boardName, Model model) {
-        BoardReadAllResponseDto boardSearchList = boardService.readChoiceBoard(2L);
+    @GetMapping("/board/{boardId}")
+    public String getBoard(@PathVariable Long boardId, Model model) {
+        BoardReadAllResponseDto boardSearchList = boardService.readChoiceBoard(boardId);
         model.addAttribute("boardData", boardSearchList);
 
-        return "boardView";  // boardView.html로 이동
+        return "/board/boardView";  // boardView.html로 이동
     }
 
 }
