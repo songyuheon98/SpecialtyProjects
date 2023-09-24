@@ -6,7 +6,6 @@ import com.fanplayground.fanplayground.dto.UserUpdateRequestDto;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserRoleEnum;
 import com.fanplayground.fanplayground.security.UserDetailsImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,7 +66,7 @@ class UserControllerTest {
                 .username("bin0222")
                 .password1("Bin@12345")
                 .password2("Bin@12345")
-                .nickName("nickname")
+                .nickname("nickname")
                 .build();
         // when
         // then

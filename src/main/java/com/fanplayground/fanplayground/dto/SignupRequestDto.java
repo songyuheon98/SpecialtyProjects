@@ -21,7 +21,7 @@ public class SignupRequestDto {
     private String password2;
 
     //@Pattern(regexp = "^[0-9a-zA-Zㄱ-ㅎ가-힣]*$.{5,20}")
-    private String nickName;
+    private String nickname;
 
     @Builder.Default
     private boolean admin = false;

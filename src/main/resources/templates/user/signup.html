@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="user.js" defer></script>
+</head>
+<body>
+<form id="signup-form">
+    <input type="text" name="username" placeholder="사용자 이름" required>
+    <input type="text" name="nickname" placeholder="닉네임" required>
+    <input type="password" name="password1" placeholder="비밀번호" required>
+    <input type="password" name="password2" placeholder="비밀번호 확인" required>
+    <input type="button" value="회원가입" onclick="submitForm()">
+</form>
+<script>
+    function submitForm() {
+        var form = document.getElementById('signup-form');
+        var data = {
+            username: form.username.value,
+            nickname: form.nickname.value,
+            password1: form.password1.value,
+            password2: form.password2.value
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/auth/signup', true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert('회원가입 성공!');
+            }
+        };
+        xhr.send(JSON.stringify(data));
+    }
+</script>
+</body>
+</html>

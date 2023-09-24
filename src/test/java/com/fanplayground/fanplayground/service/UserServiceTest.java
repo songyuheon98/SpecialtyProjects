@@ -131,7 +131,7 @@ class UserServiceTest {
                 .username("bin0017")
                 .password1("Bin@12345")
                 .password2("Bin@12345")
-                .nickName("nickname")
+                .nickname("nickname")
                 .admin(false)
                 .adminToken("").build();
 
@@ -150,7 +150,7 @@ class UserServiceTest {
                 .username("bin0017")
                 .password1("Bin@12345")
                 .password2("Bin@12345")
-                .nickName("nickname")
+                .nickname("nickname")
                 .admin(true)
                 .adminToken("").build();
 
@@ -166,7 +166,7 @@ class UserServiceTest {
                 .username("bin0017")
                 .password1("Bin@12345")
                 .password2("Bin@12345")
-                .nickName("nickname")
+                .nickname("nickname")
                 .admin(true)
                 .adminToken("AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC").build();
 
@@ -189,7 +189,7 @@ class UserServiceTest {
                 .username("bin0017")
                 .password1("Bin@12345")
                 .password2("Bin@12345")
-                .nickName("nickname")
+                .nickname("nickname")
                 .admin(true)
                 .adminToken("AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC").build();
 
@@ -205,7 +205,7 @@ class UserServiceTest {
                 .username("bin0017")
                 .password1("Bin@12345")
                 .password2("Bin@12346")
-                .nickName("nickname")
+                .nickname("nickname")
                 .admin(true)
                 .adminToken("AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC").build();
 
@@ -221,7 +221,7 @@ class UserServiceTest {
                 .username("bin0036")
                 .password1("Bin@12345")
                 .password2("Bin@12345")
-                .nickName("nickname3")
+                .nickname("nickname3")
                 .admin(true)
                 .adminToken("AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC").build();
 

@@ -57,7 +57,7 @@ public class UserService {
     public ResponseEntity<MessageDto> signup(SignupRequestDto requestDto) {
 
         String username = requestDto.getUsername();
-        String nickname = requestDto.getNickName();
+        String nickname = requestDto.getNickname();
         String password = passwordEncoder.encode(requestDto.getPassword1());
 
         passwordCheck(requestDto);
