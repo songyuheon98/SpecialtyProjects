@@ -1,7 +1,10 @@
 package com.fanplayground.fanplayground.controller;
 
 import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
+import com.fanplayground.fanplayground.dto.CardResponseDto;
+import com.fanplayground.fanplayground.repository.CardRepository;
 import com.fanplayground.fanplayground.service.BoardService;
+import com.fanplayground.fanplayground.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MainController {
     private final BoardService boardService;
+    private final CardService cardService;
+    private final CardRepository cardRepository;
+
+
     @GetMapping("/")
     public String index(Model model) {
         List<BoardReadAllResponseDto> boards = boardService.readAllBoard();
@@ -33,4 +40,10 @@ public class MainController {
 
 
 
+    @GetMapping("/user/card/{cardId}")
+    public String getCard(@PathVariable Long cardId, Model model) {
+        CardResponseDto cardData = cardService.readCard(cardId);
+        model.addAttribute("cardData", cardData);
+        return "/card/cardview";  //
+    }
 }

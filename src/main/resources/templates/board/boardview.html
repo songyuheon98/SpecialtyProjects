@@ -12,10 +12,66 @@
           crossorigin="anonymous"></script>
 
   <title>보드 뷰</title>
+  <style>
+    .container {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    #box {
+      width: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 100px auto;
+      transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+    }
+
+    #box:hover {
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      transform: translateY(-10px);
+    }
+  </style>
 </head>
 <body>
+<!--Header-->
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Trello</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
-<div class="container mt-5">
+          <li><a class="dropdown-item " href="/user/board">보드 생성</a></li>
+          <li><a class="dropdown-item" href="/main">메인으로</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              BoardChoice
+            </a>
+            <ul class="dropdown-menu">
+              <li th:each="board : ${boards}">
+                <a class="dropdown-item text-dark" th:href="'/board/' + ${board.boardId}" th:text="${board.boardId}"></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-5" >
   <!-- 보드 제목과 배경색 -->
   <div th:style="'background-color:' + ${boardData.boardColor}" class="board-header p-3 mb-4">
     <h1 th:text="${boardData.boardName}"></h1>
@@ -24,17 +80,25 @@
 
   <!-- 보드 컬럼들 -->
   <div class="board-columns d-flex gap-4">
-    <div th:each="column : ${boardData.boardColumns}" class="board-column p-3 border">
+    <div th:each="column : ${boardData.boardColumns}" class="board-column p-3 border" id="box">
       <h2 th:text="${column.columnName}"></h2>
 
       <!-- 각 컬럼에 속한 카드들 -->
       <div th:each="card : ${column.cards}" class="card mt-2 p-2">
-        <p th:text="${card.cardName}"></p>
+        <div class="card" th:onclick="'window.location.href=\'/user/card/' + ${card.cardId} + '\''">
+          <p class="card-name" th:text="${card.cardName}"></p>
+          <p class="card-deadline" th:text="${card.deadLine}"></p>
+        </div>
+        
         <!-- 추가적인 카드 정보도 표시 가능 -->
       </div>
     </div>
   </div>
 </div>
+<form id="boardCreateForm">
 
+</form>
+<script>
+</script>
 </body>
 </html>

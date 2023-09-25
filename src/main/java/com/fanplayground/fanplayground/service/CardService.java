@@ -1,6 +1,7 @@
 package com.fanplayground.fanplayground.service;
 
 import com.fanplayground.fanplayground.dto.CardRequestDto;
+import com.fanplayground.fanplayground.dto.CardResponseDto;
 import com.fanplayground.fanplayground.entity.BoardColumn;
 import com.fanplayground.fanplayground.entity.Card;
 import com.fanplayground.fanplayground.entity.User;
@@ -76,5 +77,11 @@ public class CardService {
 
     }
 
+    public CardResponseDto readCard(Long cardId){
+        Card card = cardRepository.findByCardId(cardId).orElseThrow(
+                () -> new NullPointerException("해당 카드는 없음")
+        );
+        return new CardResponseDto(card);
+    }
 }
 

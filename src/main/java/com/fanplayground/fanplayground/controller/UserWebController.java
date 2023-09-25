@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -56,14 +57,25 @@ public class UserWebController {
     @GetMapping("/main")
 
     public String mainPage(Model model) {
-        List<BoardReadAllResponseDto> boards = boardService.readAllBoard();
+        List<BoardReadAllResponseDto> boards = boardService.readAllUserEnableBoard();
         model.addAttribute("boards", boards);
         model.addAttribute("message", "Thymeleaf를 사용한 Spring 웹서비스");
         return "/main";
     }
     @GetMapping("/user/board")
-    public String createBoard() {
+    public String createBoard(Model model) {
         return "/board/boardCreate";
+    }
+
+    @GetMapping("/user/board/{boardId}")
+    public String getBoard(@PathVariable Long boardId, Model model) {
+        List<BoardReadAllResponseDto> boards = boardService.readAllUserEnableBoard();
+        model.addAttribute("boards", boards);
+        boards.forEach(System.out::println);
+        BoardReadAllResponseDto boardSearchList = boardService.readChoiceBoard(boardId);
+        model.addAttribute("boardData", boardSearchList);
+
+        return "/board/boardview";  // boardView.html로 이동
     }
 
 }

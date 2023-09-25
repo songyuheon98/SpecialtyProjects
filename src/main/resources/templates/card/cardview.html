@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,10 +12,26 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <title>Spring with Thymeleaf</title>
 
+    <title>카드 상세 정보</title>
+    <style>
+        .card-detail {
+            margin-top: 200px;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: th:style="${'background-color: ' + cardData.cardColor + ';'}";
+            margin: 100px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-detail p {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
+<div>
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Trello</a>
@@ -32,6 +49,9 @@
                     <li><a class="dropdown-item " href="/user/logout">로그아웃</a></li>
                     <li><a class="dropdown-item" href="/user/update">회원 수정</a></li>
                     <li><a class="dropdown-item" href="/user/escape">회원 탈퇴</a></li>
+                    <li><a class="dropdown-item" href="/card/update">카드 수정</a></li>
+
+                    <li><a class="dropdown-item" href="/main">메인으로</a></li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,22 +66,24 @@
                     <li><a class="dropdown-item" href="/user/board">보드 추가</a></li>
                 </ul>
 
-                <form class="d-flex mt-3" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-success" type="submit">Search</button>
-                </form>
+
             </div>
         </div>
     </div>
 </nav>
-<div>
-
-
 </div>
-
-
-<h1 th:text="${message}"></h1>
-
-
+<div class="card-detail">
+    <p><strong>카드 이름:</strong> <span th:text="${cardData.cardName}"></span></p>
+    <p><strong>카드 정보:</strong> <span th:text="${cardData.cardInfo}"></span></p>
+    <p><strong>닉네임:</strong> <span th:text="${cardData.nickName}"></span></p>
+    <p><strong>마감일:</strong> <span th:text="${cardData.deadLine}"></span></p>
+    <p><strong>카드 번호:</strong> <span th:text="${cardData.cardNo}"></span></p>
+    <button onclick="goBack()">이전 페이지로 돌아가기</button>
+</div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>
