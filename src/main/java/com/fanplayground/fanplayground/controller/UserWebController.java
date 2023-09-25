@@ -1,6 +1,11 @@
 package com.fanplayground.fanplayground.controller;
 
+import com.fanplayground.fanplayground.dto.BoardColumnResponseDto;
 import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
+import com.fanplayground.fanplayground.dto.ColumnResponseDto;
+import com.fanplayground.fanplayground.entity.BoardColumn;
+import com.fanplayground.fanplayground.repository.BoardColumnRepository;
+import com.fanplayground.fanplayground.service.BoardColumnService;
 import com.fanplayground.fanplayground.service.BoardService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,7 +24,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class UserWebController {
+    private final BoardColumnService columnService;
     private final BoardService boardService;
+    private final BoardColumnRepository boardColumnRepository;
+
     @GetMapping("/user/signup")
     public String signupPage() {
         return "/user/signup";
@@ -98,6 +106,20 @@ public class UserWebController {
         model.addAttribute("boardData", boardSearchList);
 
         return "/board/boardview";  // boardView.html로 이동
+    }
+    @GetMapping("/user/column/{columnId}")
+    public String readColumn(@PathVariable Long columnId, Model model) {
+        BoardColumn boardColumn = boardColumnRepository.findByColumnId(columnId).orElseThrow(() ->
+                new NullPointerException("해당 컬럼은 없음")
+        );
+        ColumnResponseDto boardColumnResponseDto = new ColumnResponseDto(boardColumn);
+        model.addAttribute("columnData", boardColumnResponseDto);
+        return "/column/columnView";
+    }
+
+    @GetMapping("/user/column/create")
+    public String updateColumn(Model model) {
+        return "/column/columnCreate";
     }
 
 }

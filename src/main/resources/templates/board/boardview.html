@@ -49,6 +49,8 @@
 
           <li><a class="dropdown-item " href="/user/board">보드 생성</a></li>
           <li><a class="dropdown-item" href="/main">메인으로</a></li>
+          <li><a class="dropdown-item" href="/card/create">카드 생성</a></li>
+          <li><a class="dropdown-item" href="/user/column/create">컬럼 생성</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               BoardChoice
@@ -81,7 +83,7 @@
   <!-- 보드 컬럼들 -->
   <div class="board-columns d-flex gap-4">
     <div th:each="column : ${boardData.boardColumns}" class="board-column p-3 border" id="box">
-      <h2 th:text="${column.columnName}"></h2>
+      <h2 th:onclick="'window.location.href=\'/user/column/' + ${column.columnId} + '\''" th:text="${column.columnName}"></h2>
 
       <!-- 각 컬럼에 속한 카드들 -->
       <div th:each="card : ${column.cards}" class="card mt-2 p-2">
@@ -89,7 +91,7 @@
           <p class="card-name" th:text="${card.cardName}"></p>
           <p class="card-deadline" th:text="${card.deadLine}"></p>
         </div>
-        
+
         <!-- 추가적인 카드 정보도 표시 가능 -->
       </div>
     </div>
