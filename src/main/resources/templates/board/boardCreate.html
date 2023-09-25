@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보드 생성</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <form id="boardCreateForm">
+        <label for="boardName">보드 이름:</label>
+        <input type="text" id="boardName" name="boardName" required>
+
+        <label for="boardColor">보드 색:</label>
+        <input type="text" id="boardColor" name="boardColor">
+
+        <label for="boardInfo">보드 정보:</label>
+        <textarea id="boardInfo" name="boardInfo"></textarea>
+
+        <input type="button" onclick="createBoard()" value="보드 생성" class="btn btn-warning mybtn">
+        <input type="button" onclick="mainPage()" value="메인으로" class="btn btn-warning mybtn">
+
+    </form>
+
+    <script>
+        function createBoard() {
+            var form = document.getElementById('boardCreateForm');
+            var data = {
+                boardName: form.boardName.value,
+                boardColor: form.boardColor.value,
+                boardInfo: form.boardInfo.value
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/board', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 ){
+                    if(xhr.status == 200) {
+                        alert('보드 생성 성공!');
+                        window.location.href = "/main"
+                    }
+                    else {
+                        alert('보드 생성 실패!');
+                        window.location.href = "/board/create";
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        }
+        function mainPage(){
+            window.location.href = '/main';
+        }
+    </script>
+</body>
+
+</html>

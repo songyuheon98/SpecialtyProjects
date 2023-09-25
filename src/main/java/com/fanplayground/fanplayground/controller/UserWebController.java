@@ -1,15 +1,24 @@
 package com.fanplayground.fanplayground.controller;
 
+import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
+import com.fanplayground.fanplayground.service.BoardService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.List;
+
+@RequiredArgsConstructor
 @Controller
 public class UserWebController {
-
+    private final BoardService boardService;
     @GetMapping("/user/signup")
     public String signupPage() {
         return "/user/signup";
@@ -44,11 +53,17 @@ public class UserWebController {
 
         return "/user/login";
     }
-
     @GetMapping("/main")
-    public String mainPage() {
+
+    public String mainPage(Model model) {
+        List<BoardReadAllResponseDto> boards = boardService.readAllBoard();
+        model.addAttribute("boards", boards);
+        model.addAttribute("message", "Thymeleaf를 사용한 Spring 웹서비스");
         return "/main";
     }
-
+    @GetMapping("/user/board")
+    public String createBoard() {
+        return "/board/boardCreate";
+    }
 
 }
