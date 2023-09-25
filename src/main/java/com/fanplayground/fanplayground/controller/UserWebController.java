@@ -26,4 +26,11 @@ public class UserWebController {
         return "/user/escape";
     }
 
+
+    @GetMapping("/main")
+    public String mainPage() {
+        return "/main";
+    }
+
+
 }

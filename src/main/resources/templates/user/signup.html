@@ -6,15 +6,96 @@
     <title>회원가입</title>
     <link rel="stylesheet" href="styles.css">
     <script src="user.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Noto+Sans+KR:wght@300&display=swap');
+        * {
+            /* 폰트 아직 고민중 */
+            font-family: 'Dongle', sans-serif;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .mydiv1 {
+            /* float: right; */
+            max-width: 400px;
+            margin: 40px auto auto auto;
+        }
+        .mydiv1 > h1, h5 {
+            /* float: right; */
+            text-align: center;
+        }
+        .wrap {
+            max-width: 400px;
+            margin: 40px auto auto auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        .mytitle {
+            background-color: green;
+            max-width: 400px;
+            height: 200px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            padding: 30px 0px 0px 0px;
+            background-image: url('https://blog.trello.com/hubfs/Trello__Blog_Illos_%2819%29.png');
+            background-position: center;
+            background-size: cover;
+        }
+        .mydiv2 {
+            max-width: 400px;
+            padding: 5px 20px 20px 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #333333;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #555555;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 94%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-<form id="signup-form">
-    <input type="text" name="username" placeholder="사용자 이름" required>
-    <input type="text" name="nickname" placeholder="닉네임" required>
-    <input type="password" name="password1" placeholder="비밀번호" required>
-    <input type="password" name="password2" placeholder="비밀번호 확인" required>
-    <input type="button" value="회원가입" onclick="submitForm()">
-</form>
+
+<div class="mydiv1">
+    <h1>회원가입 페이지</h1>
+</div>
+<div class="wrap">
+    <form id="signup-form">
+        <div class="mytitle"></div>
+        <div class="mydiv2">
+            <p>ID :</p>
+            <p><input id="id" type="text" name="username" placeholder="사용자 이름" required/></p>
+            <p>Password :</p>
+            <p><input id="pw" type="password" name="password1" placeholder="비밀번호" required/></p>
+            <p>Password check :</p>
+            <p><input id="pw2" type="password" name="password2" placeholder="비밀번호 확인" required/></p>
+            <p>Nickname :</p>
+            <p><input id="nickname" type="text" name="nickname" placeholder="닉네임" required/></p>
+            <input type="button" onclick="submitForm()" value="회원가입" class="btn btn-warning mybtn">
+        </div>
+    </form>
+</div>
 <script>
     function submitForm() {
         var form = document.getElementById('signup-form');
@@ -31,6 +112,7 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 alert('회원가입 성공!');
+                window.location.href = "/"
             }
         };
         xhr.send(JSON.stringify(data));
