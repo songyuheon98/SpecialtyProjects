@@ -11,7 +11,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <title>컬럼 생성</title>
+    <title>컬럼 수정</title>
     <style>
         .column-detail {
             margin-top: 200px;
@@ -45,10 +45,6 @@
                         <li><a class="dropdown-item" href="/main">메인으로</a></li>
                     </ul>
 
-                    <form class="d-flex mt-3" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -56,42 +52,42 @@
 </div>
 <div class="column-detail">
 <div class="container mt-5">
-    <h2>컬럼 생성</h2>
-    <form action="/column" method="post" id="createColumnForm">
+    <h2>컬럼 수정</h2>
+    <form id="updateColumnForm">
         <div class="mb-3">
-            <label for="boardId" class="form-label">보드 ID</label>
-            <input type="number" class="form-control" id="boardId" name="boardId" required>
+            <label for="columnId" class="form-label">컬럼 ID</label>
+            <input type="number" class="form-control" id="columnId" name="columnId" required>
         </div>
         <div class="mb-3">
-            <label for="columnName" class="form-label">컬럼 이름</label>
+            <label for="columnName" class="form-label">새로운 컬럼 이름</label>
             <input type="text" class="form-control" id="columnName" name="columnName" required>
         </div>
-        <button type="submit" class="btn btn-primary">생성</button>
+        <button type="submit" class="btn btn-primary">수정</button>
     </form>
 </div>
-</div>
+
 <script>
     $(document).ready(function() {
-        $("#createColumnForm").on("submit", function(e) {
+        $("#updateColumnForm").on("submit", function(e) {
             e.preventDefault();
 
             const formData = {
-                boardId: $("#boardId").val(),
+                columnId: $("#columnId").val(),
                 columnName: $("#columnName").val()
             };
 
             $.ajax({
-                type: "POST",
+                type: "PUT",
                 contentType: "application/json",
                 url: "/api/column",
                 data: JSON.stringify(formData),
                 dataType: "json",
                 success: function() {
-                    alert("컬럽 생성 성공");  // 예상 응답에 따라 수정이 필요합니다.
+                    alert("컬럼 수정에 성공하였습니다");  // 예상 응답에 따라 수정이 필요합니다.
                     window.history.back();
                 },
                 error: function(error) {
-                    alert("컬럼 생성에 실패하였습니다.");
+                    alert("컬럼 수정에 실패하였습니다.");
                 }
             });
         });

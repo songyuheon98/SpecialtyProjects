@@ -118,8 +118,18 @@ public class UserWebController {
     }
 
     @GetMapping("/user/column/create")
-    public String updateColumn(Model model) {
+    public String createColumn(Model model) {
         return "/column/columnCreate";
+    }
+
+    @GetMapping("/user/column/update")
+    public String updateColumn(Model model) {
+        return "/column/columnUpdate";
+    }
+
+    @GetMapping("/user/column/delete")
+    public String deleteColumn(Model model) {
+        return "/column/columnDelete";
     }
 
 }
