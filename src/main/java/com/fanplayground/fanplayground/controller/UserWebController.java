@@ -67,7 +67,20 @@ public class UserWebController {
         return "/board/boardCreate";
     }
 
-    @GetMapping("/user/board/{boardId}")
+    @GetMapping("/card/update")
+    public String updateCard(Model model) {
+        return "/card/update";
+    }
+    @GetMapping("/card/delete")
+    public String deleteCard(Model model) {
+        return "/card/delete";
+    }
+    @GetMapping("/card/create")
+    public String createCard(Model model) {
+        return "/card/create";
+    }
+
+        @GetMapping("/user/board/{boardId}")
     public String getBoard(@PathVariable Long boardId, Model model) {
         List<BoardReadAllResponseDto> boards = boardService.readAllUserEnableBoard();
         model.addAttribute("boards", boards);

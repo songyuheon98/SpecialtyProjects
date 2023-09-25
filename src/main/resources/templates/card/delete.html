@@ -1,37 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>카드 삭제</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-
-
-    <title>카드 상세 정보</title>
-    <style>
-        .card-detail {
-            margin-top: 200px;
-            border: 1px solid #e0e0e0;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: th:style="${'background-color: ' + cardData.cardColor + ';'}";
-            margin: 100px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-detail p {
-            margin-bottom: 10px;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    .card-detail {
+    margin-top: 200px;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: th:style="${'background-color: ' + cardData.cardColor + ';'}";
+    margin: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 </head>
+
 <body>
-<div>
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Trello</a>
@@ -50,9 +37,9 @@
                     <li><a class="dropdown-item" href="/user/update">회원 수정</a></li>
                     <li><a class="dropdown-item" href="/user/escape">회원 탈퇴</a></li>
                     <li><a class="dropdown-item" href="/card/update">카드 수정</a></li>
-                    <li><a class="dropdown-item" href="/card/delete">카드 삭제</a></li>
-                    <li><a class="dropdown-item" href="/card/create">카드 생성</a></li>
+
                     <li><a class="dropdown-item" href="/main">메인으로</a></li>
+                    <li><a class="dropdown-item" type="button" onclick="goBack()">이전 페이지로</a></li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,19 +59,46 @@
         </div>
     </div>
 </nav>
+<div class = "card-detail">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="mb-4">카드 삭제</h3>
+            <form id="deleteCardForm">
+                <div class="mb-3">
+                    <label for="cardId" class="form-label">카드 ID</label>
+                    <input type="number" class="form-control" id="cardId" name="cardId" required>
+                </div>
+                <button type="button" class="btn btn-danger" onclick="deleteCard()">카드 삭제</button>
+            </form>
+        </div>
+    </div>
 </div>
-<div class="card-detail">
-    <p><strong>카드 이름:</strong> <span th:text="${cardData.cardName}"></span></p>
-    <p><strong>카드 정보:</strong> <span th:text="${cardData.cardInfo}"></span></p>
-    <p><strong>닉네임:</strong> <span th:text="${cardData.nickName}"></span></p>
-    <p><strong>마감일:</strong> <span th:text="${cardData.deadLine}"></span></p>
-    <p><strong>카드 번호:</strong> <span th:text="${cardData.cardNo}"></span></p>
-    <button onclick="goBack()">이전 페이지로 돌아가기</button>
 </div>
 <script>
+    function deleteCard() {
+        var cardId = document.getElementById('cardId').value;
+        if(!cardId) {
+            alert('카드 ID를 입력해주세요.');
+            return;
+        }
+
+        $.ajax({
+            url: '/api/card/' + cardId,
+            type: 'DELETE',
+            success: function(response) {
+                alert('카드 삭제 성공!');
+                window.history.goback();
+            },
+            error: function(error) {
+                alert('카드 삭제 실패!');
+            }
+        });
+    }
     function goBack() {
         window.history.back();
     }
 </script>
 </body>
+
 </html>
