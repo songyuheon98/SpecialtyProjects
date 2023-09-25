@@ -19,7 +19,7 @@ public class MainController {
         List<BoardReadAllResponseDto> boards = boardService.readAllBoard();
         model.addAttribute("boards", boards);
         model.addAttribute("message", "Thymeleaf를 사용한 Spring 웹서비스");
-        return "main.html";
+        return "/main";
 
     }
 
