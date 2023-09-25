@@ -28,7 +28,7 @@ public class MainController {
         BoardReadAllResponseDto boardSearchList = boardService.readChoiceBoard(boardId);
         model.addAttribute("boardData", boardSearchList);
 
-        return "/board/boardView";  // boardView.html로 이동
+        return "/board/boardview";  // boardView.html로 이동
     }
 
 }

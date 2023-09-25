@@ -31,7 +31,7 @@ class MainControllerTest {
     void getBoard() throws Exception {
         mockMvc.perform(get("/board/{boardId}", 1L ))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/board/boardView"))
+                .andExpect(view().name("/board/boardview"))
                 .andDo(print());
     }
 }
