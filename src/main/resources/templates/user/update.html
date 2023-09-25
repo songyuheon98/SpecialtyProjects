@@ -5,16 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원 수정</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Noto+Sans+KR:wght@300&display=swap');
+
+    * {
+      /* 폰트 아직 고민중 */
+      font-family: 'Dongle', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .mydiv1 {
+      /* float: right; */
+      max-width: 400px;
+      margin: 40px auto auto auto;
+    }
+
+    .mydiv1 > h1, h5 {
+      /* float: right; */
+      text-align: center;
+    }
+
+    .wrap {
+      max-width: 400px;
+      margin: 40px auto auto auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+
+    .mytitle {
+      background-color: green;
+      max-width: 400px;
+      height: 200px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      color: white;
+      text-align: center;
+      padding: 30px 0px 0px 0px;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbizCPpJgGk4_00BsykTGRApNEUl_4ANpNJw&usqp=CAU');
+      background-position: center;
+      background-size: cover;
+    }
+
+    .mydiv2 {
+      max-width: 400px;
+      padding: 5px 20px 20px 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      color: black;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #333333;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #555555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 94%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid black;
+      border-radius: 5px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
 
-<div class="container">
+<div class="mydiv1">
   <h1>회원 정보 수정 페이지</h1>
+</div>
+<div class="wrap">
   <form id="update-form">
-    <label for="nickname">닉네임:</label>
-    <input type="text" id="nickname" name="nickName" placeholder="새로운 닉네임" required>
-    <input type="button" value="수정하기" onclick="submitUpdate()">
+    <div class="mytitle"></div>
+    <div class="mydiv2">
+      <p>닉네입 :</p>
+      <p><input type="text" id="nickname" name="nickName" placeholder="새로운 닉네임" required></p>
+      <input type="button" value="수정하기" onclick="submitUpdate()" class="btn btn-warning mybtn">
+      <input type="button" value="메인으로" onclick="mainPage()" class="btn btn-warning mybtn">
+    </div>
   </form>
 </div>
 
@@ -29,12 +110,20 @@
     xhr.open('PUT', '/api/auth/update', true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        alert('회원 정보 수정 완료!');
-        window.location.href = '/'; // 메인 페이지 또는 원하는 페이지로 리다이렉션
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          alert('회원 정보 수정 완료!');
+          window.location.href = '/main'; // 메인 페이지 또는 원하는 페이지로 리다이렉션
+        } else {
+          alert('회원 정보 수정 실패!');
+          window.location.href = '/user/update';
+        }
       }
     };
     xhr.send(JSON.stringify(data));
+  }
+  function mainPage(){
+    window.location.href = '/main';
   }
 </script>
 
