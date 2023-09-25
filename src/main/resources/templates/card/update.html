@@ -113,7 +113,7 @@
       if (xhr.readyState == 4) {
         if (xhr.status == 200) {
           alert('카드 수정 성공!');
-          window.history.back();
+          window.location.href = '/main';
         } else {
           alert('카드 수정 실패!');
         }

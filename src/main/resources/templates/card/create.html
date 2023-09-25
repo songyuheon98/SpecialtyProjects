@@ -115,6 +115,7 @@
       data: JSON.stringify(cardData),
       success: function(response) {
         alert('카드 생성 성공!');
+        window.location.href = '/main';
       },
       error: function(error) {
         alert('카드 생성 실패!');

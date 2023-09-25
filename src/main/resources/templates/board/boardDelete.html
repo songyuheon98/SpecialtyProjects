@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  .board-detail {
+  margin-top: 200px;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: th:style="${'background-color: ' + cardData.cardColor + ';'}";
+  margin: 100px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+</head>
+
+<body>
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Trello</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+          <li><a class="dropdown-item" href="/main">메인으로</a></li>
+        </ul>
+
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class=".board-details">
+<div class="container mt-5">
+  <h2 class="mb-4">보드 삭제</h2>
+  <form id="boardDeleteForm">
+    <div class="mb-3">
+      <label for="boardId" class="form-label">삭제할 보드 ID</label>
+      <input type="number" class="form-control" id="boardId" required>
+    </div>
+
+    <button type="button" class="btn btn-danger" onclick="deleteBoard()">삭제하기</button>
+  </form>
+</div>
+</div>
+<script>
+  function deleteBoard() {
+    var boardId = document.getElementById('boardId').value;
+
+    fetch(`/api/board/${boardId}`, {
+      method: 'DELETE'
+    })
+            .then(response => response.json())
+            .then(data => {
+              if(data) {
+                alert('보드가 삭제되었습니다.');
+                window.location.href = '/main';
+              } else {
+                alert('보드 삭제 실패!');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+  }
+</script>
+
+</body>
+
+</html>
