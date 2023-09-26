@@ -15,19 +15,18 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 public class UserController {
     private final UserService userService;
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    // ResponseEntity<Map>
-    @PostMapping("/auth/signup")
+    @PostMapping("/signup")
     public ResponseEntity<MessageDto> signup(@Valid @RequestBody SignupRequestDto requestDto){
         return userService.signup(requestDto);
     }
 
-    @DeleteMapping("/auth/escape")
+    @DeleteMapping("/escape")
     public ResponseEntity<MessageDto> escape(){
         ResponseEntity<MessageDto> escape_result= userService.escape();
 
@@ -43,7 +42,7 @@ public class UserController {
 
     }
 
-    @PutMapping("/auth/update")
+    @PutMapping("/update")
     public UserUpdateResponseDto update(@Valid @RequestBody UserUpdateRequestDto requestDto){
         return userService.update(requestDto);
     }

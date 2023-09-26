@@ -49,7 +49,7 @@ public class CommentService {
         // 댓글 존재 확인
         Comment comment = hasComment(commentId, user.getNickName(), user.getRole().toString());
         commentRepository.delete(comment);
-        return "succ";
+        return "해당 댓글 삭제";
     }
 
 

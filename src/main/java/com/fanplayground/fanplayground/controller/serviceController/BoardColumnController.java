@@ -26,18 +26,13 @@ public class BoardColumnController {
         return columnService.updateBoardColumn(requestDto);
     }
 
-//    @PutMapping("/column")
-//    public List<BoardColumnMoveResponseDto> moveBoardColumn(@RequestBody BoardColumnMoveRequestDto boardColumnMoveRequestDto){
-//        return columnService.moveBoardColumn(boardColumnMoveRequestDto);
-//    }
 
-
-    @PutMapping("/column/{boardId}")
+    @PutMapping("/{boardId}")
     public BoardColumnMoveResponseDto moveBoardColumn(@PathVariable Long boardId, @RequestBody BoardColumnMoveRequestDto requestDto){
         return columnService.moveBoardColumn(boardId,requestDto);
     }
 
-    @DeleteMapping("/column/{columnId}")
+    @DeleteMapping("/{columnId}")
     public MessageDto deleteBoardColumn(@PathVariable Long columnId){
         return columnService.deleteBoardColumn(columnId);
     }
