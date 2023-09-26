@@ -1,4 +1,4 @@
-package com.fanplayground.fanplayground.controller;
+package com.fanplayground.fanplayground.controller.serviceController;
 
 import com.fanplayground.fanplayground.dto.board.*;
 import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateRequestDto;
@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping("/api/board")
 @RequiredArgsConstructor
 public class BoardController {
-
     private final BoardService boardService;
     @PostMapping
     public BoardCreateResponseDto createBoard(@RequestBody BoardCreateRequestDto requestDto)  {
@@ -31,7 +30,6 @@ public class BoardController {
     public BoardInviteResponseDto boardUpdate(@PathVariable Long boardId, @RequestBody BoardCreateRequestDto requestDto){
         return boardService.boardUpdate(boardId,requestDto);
     }
-//
 
     @DeleteMapping("/{boardId}")
     public BoardInviteResponseDto deleteBoard(@PathVariable Long boardId){

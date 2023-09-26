@@ -1,4 +1,4 @@
-package com.fanplayground.fanplayground.controller;
+package com.fanplayground.fanplayground.controller.serviceController;
 
 import com.fanplayground.fanplayground.dto.boardColumn.MessageUpdateDto;
 import com.fanplayground.fanplayground.dto.boardColumn.move.BoardColumnMoveRequestDto;

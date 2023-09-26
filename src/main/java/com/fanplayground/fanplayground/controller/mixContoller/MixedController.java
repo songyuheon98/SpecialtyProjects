@@ -1,11 +1,12 @@
-package com.fanplayground.fanplayground.controller;
+package com.fanplayground.fanplayground.controller.mixContoller;
 
 import com.fanplayground.fanplayground.dto.board.BoardReadAllResponseDto;
+import com.fanplayground.fanplayground.dto.card.CardResponseDto;
 import com.fanplayground.fanplayground.dto.etc.ColumnResponseDto;
 import com.fanplayground.fanplayground.entity.BoardColumn;
-import com.fanplayground.fanplayground.repository.BoardColumnRepository;
 import com.fanplayground.fanplayground.service.BoardColumnService;
 import com.fanplayground.fanplayground.service.BoardService;
+import com.fanplayground.fanplayground.service.CardService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -24,24 +25,57 @@ public class MixedController {
 
     private final BoardService boardService;
     private final BoardColumnService boardColumnService;
+    private final CardService cardService;
+
+    @GetMapping("/")
+    public String index(Model model) {
+        List<BoardReadAllResponseDto> boards = boardService.readAllBoard();
+        model.addAttribute("boards", boards);
+        return "/user/login";
+    }
 
     @GetMapping("/main")
     public String mainPage(Model model) {
         List<BoardReadAllResponseDto> boards = boardService.readAllUserEnableBoard();
         model.addAttribute("boards", boards);
-        model.addAttribute("message", "Thymeleaf를 사용한 Spring 웹서비스");
         return "/main";
+    }
+
+    @GetMapping("/user/logout")
+    public String logout() {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletResponse response = attributes.getResponse();
+
+        Cookie cookie = new Cookie("Authorization", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "/user/login";
+    }
+
+    @GetMapping("/board/{boardId}")
+    public String getBoard1(@PathVariable Long boardId, Model model) {
+        BoardReadAllResponseDto boardSearchList = boardService.readChoiceBoard(boardId);
+        model.addAttribute("boardData", boardSearchList);
+        return "/board/boardview";
     }
 
     @GetMapping("/user/board/{boardId}")
     public String getBoard(@PathVariable Long boardId, Model model) {
         List<BoardReadAllResponseDto> boards = boardService.readAllUserEnableBoard();
         BoardReadAllResponseDto boardSearchList = boardService.readChoiceBoard(boardId);
-
         model.addAttribute("boards", boards);
         model.addAttribute("boardData", boardSearchList);
 
         return "/board/boardview";
+    }
+
+    @GetMapping("/user/card/{cardId}")
+    public String getCard(@PathVariable Long cardId, Model model) {
+        CardResponseDto cardData = cardService.readCard(cardId);
+        model.addAttribute("cardData", cardData);
+        return "/card/cardview";
     }
 
     @GetMapping("/user/column/{columnId}")
@@ -52,15 +86,5 @@ public class MixedController {
         return "/column/columnView";
     }
 
-    @GetMapping("/user/logout")
-    public String logout() {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletResponse response = attributes.getResponse();
-        Cookie cookie = new Cookie("Authorization", null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        response.addCookie(cookie);
 
-        return "/user/login";
-    }
 }
