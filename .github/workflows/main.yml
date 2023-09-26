@@ -73,6 +73,7 @@ jobs:
           # 리소스 파일 EC2로 복사
           scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/static ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/resources/
           scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/templates ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/resources/
-          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "pgrep java | xargs kill -9; nohup java -jar /home/${{ secrets.EC2_USERNAME }}/trelloServer.jar > app.log 2>&1 &"
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "pgrep java | xargs kill -9; nohup java -Dspring.resources.static-locations=file:/home/${{ secrets.EC2_USERNAME }}/resources/static/ -Dspring.thymeleaf.prefix=file:/home/${{ secrets.EC2_USERNAME }}/resources/templates/ -jar /home/${{ secrets.EC2_USERNAME }}/trelloServer.jar > app.log 2>&1 &"
+
           rm -f private_key.pem
 
