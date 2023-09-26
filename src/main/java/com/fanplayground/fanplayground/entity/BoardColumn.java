@@ -1,6 +1,6 @@
 package com.fanplayground.fanplayground.entity;
 
-import com.fanplayground.fanplayground.dto.BoardColumnRequestDto;
+import com.fanplayground.fanplayground.dto.boardColumn.create.BoardColumnRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;

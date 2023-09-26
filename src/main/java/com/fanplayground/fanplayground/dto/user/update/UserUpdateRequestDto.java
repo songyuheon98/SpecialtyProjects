@@ -1,4 +1,4 @@
-package com.fanplayground.fanplayground.dto;
+package com.fanplayground.fanplayground.dto.user.update;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.fanplayground.fanplayground.dto;
+package com.fanplayground.fanplayground.dto.etc;
 
 import com.fanplayground.fanplayground.entity.BoardColumn;
 import com.fanplayground.fanplayground.entity.Card;

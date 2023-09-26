@@ -1,10 +1,9 @@
 package com.fanplayground.fanplayground.controller;
-import com.fanplayground.fanplayground.dto.CardRequestDto;
+import com.fanplayground.fanplayground.dto.card.CardRequestDto;
 import com.fanplayground.fanplayground.entity.Card;
 import com.fanplayground.fanplayground.security.UserDetailsImpl;
 import com.fanplayground.fanplayground.service.CardService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 

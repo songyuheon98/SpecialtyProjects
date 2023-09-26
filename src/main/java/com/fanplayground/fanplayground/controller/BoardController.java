@@ -1,6 +1,10 @@
 package com.fanplayground.fanplayground.controller;
 
-import com.fanplayground.fanplayground.dto.*;
+import com.fanplayground.fanplayground.dto.board.*;
+import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateRequestDto;
+import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateResponseDto;
+import com.fanplayground.fanplayground.dto.board.inviteUpdateDelete.BoardInviteRequestDto;
+import com.fanplayground.fanplayground.dto.board.inviteUpdateDelete.BoardInviteResponseDto;
 import com.fanplayground.fanplayground.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

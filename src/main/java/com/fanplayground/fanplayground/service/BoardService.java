@@ -2,7 +2,11 @@ package com.fanplayground.fanplayground.service;
 
 
 
-import com.fanplayground.fanplayground.dto.*;
+import com.fanplayground.fanplayground.dto.board.*;
+import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateRequestDto;
+import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateResponseDto;
+import com.fanplayground.fanplayground.dto.board.inviteUpdateDelete.BoardInviteRequestDto;
+import com.fanplayground.fanplayground.dto.board.inviteUpdateDelete.BoardInviteResponseDto;
 import com.fanplayground.fanplayground.exception.UserNotFoundException;
 import com.fanplayground.fanplayground.jwt.SecurityUtil;
 
@@ -169,7 +173,7 @@ public class BoardService {
      * @param requestDto : BoardInviteRequestDto
      * @return : 0 -> 권한 없음, 1 -> 권한 있음
      */
-    public int authority(User LoginUser,BoardInviteRequestDto requestDto){
+    public int authority(User LoginUser, BoardInviteRequestDto requestDto){
         int check = 0;
         try{
             if(LoginUser.getBoards().stream().map(n->n.getBoardId()).toList()

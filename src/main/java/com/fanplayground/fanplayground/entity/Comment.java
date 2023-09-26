@@ -1,6 +1,6 @@
 package com.fanplayground.fanplayground.entity;
 
-import com.fanplayground.fanplayground.dto.CommentRequestDto;
+import com.fanplayground.fanplayground.dto.comment.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 

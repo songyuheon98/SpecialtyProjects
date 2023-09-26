@@ -1,8 +1,8 @@
 package com.fanplayground.fanplayground.controller;
 
 
-import com.fanplayground.fanplayground.dto.SignupRequestDto;
-import com.fanplayground.fanplayground.dto.UserUpdateRequestDto;
+import com.fanplayground.fanplayground.dto.user.signup.SignupRequestDto;
+import com.fanplayground.fanplayground.dto.user.update.UserUpdateRequestDto;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserRoleEnum;
 import com.fanplayground.fanplayground.security.UserDetailsImpl;

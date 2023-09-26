@@ -1,7 +1,7 @@
 package com.fanplayground.fanplayground.service;
 
 
-import com.fanplayground.fanplayground.dto.CardRequestDto;
+import com.fanplayground.fanplayground.dto.card.CardRequestDto;
 import com.fanplayground.fanplayground.entity.BoardColumn;
 import com.fanplayground.fanplayground.entity.Card;
 import com.fanplayground.fanplayground.entity.User;

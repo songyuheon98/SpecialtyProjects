@@ -1,4 +1,4 @@
-package com.fanplayground.fanplayground.dto;
+package com.fanplayground.fanplayground.dto.card;
 
 import com.fanplayground.fanplayground.entity.Card;
 import jakarta.persistence.Column;

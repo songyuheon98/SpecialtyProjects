@@ -1,10 +1,10 @@
 package com.fanplayground.fanplayground.service;
 
 
-import com.fanplayground.fanplayground.dto.SignupRequestDto;
-import com.fanplayground.fanplayground.dto.UserUpdateRequestDto;
-import com.fanplayground.fanplayground.dto.UserUpdateResponseDto;
-import com.fanplayground.fanplayground.dto.MessageDto;
+import com.fanplayground.fanplayground.dto.user.signup.SignupRequestDto;
+import com.fanplayground.fanplayground.dto.user.update.UserUpdateRequestDto;
+import com.fanplayground.fanplayground.dto.user.update.UserUpdateResponseDto;
+import com.fanplayground.fanplayground.dto.message.MessageDto;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserRoleEnum;
 import com.fanplayground.fanplayground.exception.DuplicateUsernameException;

@@ -1,6 +1,11 @@
 package com.fanplayground.fanplayground.service;
 
-import com.fanplayground.fanplayground.dto.*;
+import com.fanplayground.fanplayground.dto.boardColumn.MessageUpdateDto;
+import com.fanplayground.fanplayground.dto.boardColumn.move.BoardColumnMoveRequestDto;
+import com.fanplayground.fanplayground.dto.boardColumn.move.BoardColumnMoveResponseDto;
+import com.fanplayground.fanplayground.dto.boardColumn.create.BoardColumnRequestDto;
+import com.fanplayground.fanplayground.dto.boardColumn.update.BoardColumnUpdateRequestDto;
+import com.fanplayground.fanplayground.dto.message.MessageDto;
 import com.fanplayground.fanplayground.entity.Board;
 import com.fanplayground.fanplayground.entity.BoardColumn;
 import com.fanplayground.fanplayground.jwt.SecurityUtil;

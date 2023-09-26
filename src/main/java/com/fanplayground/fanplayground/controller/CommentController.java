@@ -1,7 +1,7 @@
 package com.fanplayground.fanplayground.controller;
 
 
-import com.fanplayground.fanplayground.dto.CommentRequestDto;
+import com.fanplayground.fanplayground.dto.comment.CommentRequestDto;
 import com.fanplayground.fanplayground.entity.Comment;
 import com.fanplayground.fanplayground.security.UserDetailsImpl;
 import com.fanplayground.fanplayground.service.CommentService;

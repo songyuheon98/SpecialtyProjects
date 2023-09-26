@@ -1,25 +1,27 @@
 package com.fanplayground.fanplayground.controller;
 
-import com.fanplayground.fanplayground.dto.*;
-import com.fanplayground.fanplayground.entity.BoardColumn;
+import com.fanplayground.fanplayground.dto.boardColumn.MessageUpdateDto;
+import com.fanplayground.fanplayground.dto.boardColumn.move.BoardColumnMoveRequestDto;
+import com.fanplayground.fanplayground.dto.boardColumn.move.BoardColumnMoveResponseDto;
+import com.fanplayground.fanplayground.dto.boardColumn.create.BoardColumnRequestDto;
+import com.fanplayground.fanplayground.dto.boardColumn.update.BoardColumnUpdateRequestDto;
+import com.fanplayground.fanplayground.dto.message.MessageDto;
 import com.fanplayground.fanplayground.service.BoardColumnService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/column")
 @RequiredArgsConstructor
-public class ColumnController {
+public class BoardColumnController {
     private final BoardColumnService columnService;
 
-    @PostMapping("/column")
+    @PostMapping
     public MessageDto createBoardColumn(@RequestBody BoardColumnRequestDto requestDto)  {
         return columnService.createBoardColumn(requestDto);
     }
 
-    @PutMapping("/column")
+    @PutMapping
     public MessageUpdateDto updateBoardColumn(@RequestBody BoardColumnUpdateRequestDto requestDto){
         return columnService.updateBoardColumn(requestDto);
     }

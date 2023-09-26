@@ -1,15 +1,12 @@
 package com.fanplayground.fanplayground.entity;
 
 
-import com.fanplayground.fanplayground.dto.CardRequestDto;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fanplayground.fanplayground.dto.card.CardRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter

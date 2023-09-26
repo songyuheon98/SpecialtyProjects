@@ -1,6 +1,11 @@
 package com.fanplayground.fanplayground.controller;
 
-import com.fanplayground.fanplayground.dto.*;
+import com.fanplayground.fanplayground.dto.boardColumn.MessageUpdateDto;
+import com.fanplayground.fanplayground.dto.boardColumn.move.BoardColumnMoveRequestDto;
+import com.fanplayground.fanplayground.dto.boardColumn.move.BoardColumnMoveResponseDto;
+import com.fanplayground.fanplayground.dto.boardColumn.create.BoardColumnRequestDto;
+import com.fanplayground.fanplayground.dto.boardColumn.update.BoardColumnUpdateRequestDto;
+import com.fanplayground.fanplayground.dto.message.MessageDto;
 import com.fanplayground.fanplayground.entity.Board;
 import com.fanplayground.fanplayground.service.BoardColumnService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureMockMvc(addFilters = false)
 @SpringBootTest
-class ColumnControllerTest {
+class BoardColumnControllerTest {
 
     @Autowired
     public MockMvc mockMvc;

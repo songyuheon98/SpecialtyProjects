@@ -1,7 +1,7 @@
 package com.fanplayground.fanplayground.service;
 
-import com.fanplayground.fanplayground.dto.CardRequestDto;
-import com.fanplayground.fanplayground.dto.CardResponseDto;
+import com.fanplayground.fanplayground.dto.card.CardRequestDto;
+import com.fanplayground.fanplayground.dto.card.CardResponseDto;
 import com.fanplayground.fanplayground.entity.BoardColumn;
 import com.fanplayground.fanplayground.entity.Card;
 import com.fanplayground.fanplayground.entity.User;
@@ -9,7 +9,6 @@ import com.fanplayground.fanplayground.repository.BoardColumnRepository;
 import com.fanplayground.fanplayground.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

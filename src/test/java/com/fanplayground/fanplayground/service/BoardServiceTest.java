@@ -1,6 +1,10 @@
 package com.fanplayground.fanplayground.service;
 
-import com.fanplayground.fanplayground.dto.*;
+import com.fanplayground.fanplayground.dto.board.*;
+import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateRequestDto;
+import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateResponseDto;
+import com.fanplayground.fanplayground.dto.board.inviteUpdateDelete.BoardInviteRequestDto;
+import com.fanplayground.fanplayground.dto.board.inviteUpdateDelete.BoardInviteResponseDto;
 import com.fanplayground.fanplayground.entity.Board;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.entity.UserBoard;
@@ -13,7 +17,6 @@ import com.fanplayground.fanplayground.repository.UserRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

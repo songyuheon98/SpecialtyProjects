@@ -1,8 +1,7 @@
 package com.fanplayground.fanplayground.controller;
 
-import com.fanplayground.fanplayground.dto.BoardColumnResponseDto;
-import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
-import com.fanplayground.fanplayground.dto.ColumnResponseDto;
+import com.fanplayground.fanplayground.dto.board.BoardReadAllResponseDto;
+import com.fanplayground.fanplayground.dto.etc.ColumnResponseDto;
 import com.fanplayground.fanplayground.entity.BoardColumn;
 import com.fanplayground.fanplayground.repository.BoardColumnRepository;
 import com.fanplayground.fanplayground.service.BoardColumnService;
@@ -13,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

@@ -1,6 +1,6 @@
 package com.fanplayground.fanplayground.jwt;
 
-import com.fanplayground.fanplayground.dto.LoginRequestDto;
+import com.fanplayground.fanplayground.dto.jwt.LoginRequestDto;
 import com.fanplayground.fanplayground.entity.UserRoleEnum;
 import com.fanplayground.fanplayground.exception.UserNotFoundException;
 import com.fanplayground.fanplayground.security.UserDetailsImpl;

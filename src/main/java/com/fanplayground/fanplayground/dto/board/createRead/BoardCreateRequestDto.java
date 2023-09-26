@@ -1,4 +1,4 @@
-package com.fanplayground.fanplayground.dto;
+package com.fanplayground.fanplayground.dto.board.createRead;
 
 import lombok.Builder;
 import lombok.Getter;

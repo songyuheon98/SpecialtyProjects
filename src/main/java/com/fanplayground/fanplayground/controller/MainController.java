@@ -1,7 +1,7 @@
 package com.fanplayground.fanplayground.controller;
 
-import com.fanplayground.fanplayground.dto.BoardReadAllResponseDto;
-import com.fanplayground.fanplayground.dto.CardResponseDto;
+import com.fanplayground.fanplayground.dto.board.BoardReadAllResponseDto;
+import com.fanplayground.fanplayground.dto.card.CardResponseDto;
 import com.fanplayground.fanplayground.repository.CardRepository;
 import com.fanplayground.fanplayground.service.BoardService;
 import com.fanplayground.fanplayground.service.CardService;

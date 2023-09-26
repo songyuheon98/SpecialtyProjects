@@ -1,15 +1,13 @@
 package com.fanplayground.fanplayground.service;
 
-import com.fanplayground.fanplayground.dto.CommentRequestDto;
+import com.fanplayground.fanplayground.dto.comment.CommentRequestDto;
 import com.fanplayground.fanplayground.entity.Card;
 import com.fanplayground.fanplayground.entity.Comment;
 import com.fanplayground.fanplayground.entity.User;
 import com.fanplayground.fanplayground.repository.CardRepository;
 import com.fanplayground.fanplayground.repository.CommentRepository;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

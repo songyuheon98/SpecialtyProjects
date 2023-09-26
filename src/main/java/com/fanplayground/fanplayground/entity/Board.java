@@ -1,5 +1,5 @@
 package com.fanplayground.fanplayground.entity;
-import com.fanplayground.fanplayground.dto.BoardCreateRequestDto;
+import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
