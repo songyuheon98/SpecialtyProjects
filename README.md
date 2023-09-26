@@ -1,7 +1,3 @@
 # SpecialtyProjects
 
-
-## 최근 빌드 스캔 결과
-[빌드 스캔 보기](https://github.com/songyuheon98/SpecialtyProjects/actions/runs/6312251897/attempts/1#summary-17137915541)
-
-![]()
+[![Java CI with Gradle](https://github.com/songyuheon98/SpecialtyProjects/actions/workflows/main.yml/badge.svg?branch=develop)](https://github.com/songyuheon98/SpecialtyProjects/actions/workflows/main.yml)
