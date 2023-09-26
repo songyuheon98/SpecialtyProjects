@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class BoardColumnManagementViewController {
 
     @GetMapping("/user/column/create")
-    public String createColumn(Model model) {
+    public String createColumn() {
         return "/column/columnCreate";
     }
 
     @GetMapping("/user/column/update")
-    public String updateColumn(Model model) {
+    public String updateColumn() {
         return "/column/columnUpdate";
     }
 
     @GetMapping("/user/column/delete")
-    public String deleteColumn(Model model) {
+    public String deleteColumn() {
         return "/column/columnDelete";
     }
 }

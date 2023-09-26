@@ -37,8 +37,13 @@ public class MixedController {
     @GetMapping("/main")
     public String mainPage(Model model) {
         List<BoardReadAllResponseDto> boards = boardService.readAllUserEnableBoard();
+        Long boardId = boards.get(0).getBoardId();
         model.addAttribute("boards", boards);
-        return "/main";
+
+        if(boards.size() == 0){
+            return "/main";
+        }
+        return "redirect:/board/"+ boardId;
     }
 
     @GetMapping("/user/logout")

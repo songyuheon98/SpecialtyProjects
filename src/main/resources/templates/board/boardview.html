@@ -46,22 +46,25 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li><a class="dropdown-item " href="/user/logout">로그아웃</a></li>
+          <li><a class="dropdown-item" href="/user/update">회원 수정</a></li>
+          <li><a class="dropdown-item" href="/user/escape">회원 탈퇴</a></li>
 
+          <p></p>
           <li><a class="dropdown-item " href="/user/board">보드 생성</a></li>
-          <li><a class="dropdown-item" href="/main">메인으로</a></li>
+          <p></p>
           <li><a class="dropdown-item" href="/card/create">카드 생성</a></li>
+          <li><a class="dropdown-item" href="/card/update">카드 수정</a></li>
+          <li><a class="dropdown-item" href="/card/delete">카드 삭제</a></li>
+          <p></p>
           <li><a class="dropdown-item" href="/user/column/create">컬럼 생성</a></li>
           <li><a class="dropdown-item" href="/user/column/update">컬럼 수정</a></li>
           <li><a class="dropdown-item" href="/user/column/delete">컬럼 삭제</a></li>
+          <p></p>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               BoardChoice
             </a>
-            <ul class="dropdown-menu">
-              <li th:each="board : ${boards}">
-                <a class="dropdown-item text-dark" th:href="'/board/' + ${board.boardId}" th:text="${board.boardId}"></a>
-              </li>
-            </ul>
           </li>
         </ul>
 
