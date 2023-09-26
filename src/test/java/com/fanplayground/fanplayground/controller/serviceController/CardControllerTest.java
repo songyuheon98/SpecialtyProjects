@@ -1,5 +1,4 @@
-package com.fanplayground.fanplayground.controller;
-
+package com.fanplayground.fanplayground.controller.serviceController;
 
 import com.fanplayground.fanplayground.dto.card.CardRequestDto;
 import com.fanplayground.fanplayground.entity.Card;
@@ -33,10 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 public class CardControllerTest {
-
     @Autowired
     private ObjectMapper objectMapper;
-
 
     @Autowired
     private MockMvc mvc;
@@ -139,8 +136,4 @@ public class CardControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
-
-
-
-
 }

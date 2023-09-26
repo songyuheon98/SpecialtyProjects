@@ -1,6 +1,5 @@
 package com.fanplayground.fanplayground.controller.serviceController;
 
-import com.fanplayground.fanplayground.dto.board.*;
 import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateRequestDto;
 import com.fanplayground.fanplayground.dto.board.createRead.BoardCreateResponseDto;
 import com.fanplayground.fanplayground.dto.board.inviteUpdateDelete.BoardInviteRequestDto;
@@ -8,8 +7,6 @@ import com.fanplayground.fanplayground.dto.board.inviteUpdateDelete.BoardInviteR
 import com.fanplayground.fanplayground.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/board")

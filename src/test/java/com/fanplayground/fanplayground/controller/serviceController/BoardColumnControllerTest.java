@@ -1,4 +1,4 @@
-package com.fanplayground.fanplayground.controller;
+package com.fanplayground.fanplayground.controller.serviceController;
 
 import com.fanplayground.fanplayground.dto.boardColumn.MessageUpdateDto;
 import com.fanplayground.fanplayground.dto.boardColumn.move.BoardColumnMoveRequestDto;
@@ -46,14 +46,12 @@ class BoardColumnControllerTest {
     @Test
     @DisplayName("컬럼 생성 확인")
     public void testCreateBoardColumn() throws Exception {
-        //given
         MessageDto responseDto = MessageDto.builder()
                 .msg("해당 컬럼이 추가되었습니다")
                 .build();
 
         when(boardColumnService.createBoardColumn(any(BoardColumnRequestDto.class))).thenReturn(MessageDto.builder().msg("해당 컬럼이 추가되었습니다").build());
         mockMvc.perform(post("/api/column")
-//                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(BoardColumnRequestDto.builder().build())))
                 .andExpect(status().isOk())
@@ -64,7 +62,6 @@ class BoardColumnControllerTest {
     @Test
     @DisplayName("컬럼 이동 확인")
     public void testMoveBoardColumn() throws Exception {
-        // GIVEN
         List<Long> column_Nos = new ArrayList<>();
         column_Nos.add(1L);
         column_Nos.add(2L);
@@ -75,12 +72,9 @@ class BoardColumnControllerTest {
         BoardColumnMoveResponseDto responseDto = BoardColumnMoveResponseDto.builder().columnsNos(column_Nos).build();
 
         BoardColumnMoveRequestDto requestDto = BoardColumnMoveRequestDto.builder().columnsNos(column_Nos2).build();
-        // when
         when(boardColumnService.moveBoardColumn(any(Long.class), any(BoardColumnMoveRequestDto.class))).thenReturn(responseDto);
 
-        //THEN
         mockMvc.perform(put("/api/column/" + 1L)
-//                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isOk())
@@ -89,8 +83,6 @@ class BoardColumnControllerTest {
                 .andDo(print());
 
     }
-
-    //
     @Test
     @DisplayName("컬럼 수정 확인")
     public void testUpdateBoardColumn() throws Exception {
@@ -105,7 +97,6 @@ class BoardColumnControllerTest {
                 .thenReturn(MessageUpdateDto.builder().msg("해당 컬럼명이 수정되었습니다").columnName("컬럼을 수정하자").build());
 
         mockMvc.perform(put("/api/column")
-//                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isOk())
@@ -114,7 +105,4 @@ class BoardColumnControllerTest {
                 .andDo(print());
 
     }
-
-
-
 }

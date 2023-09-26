@@ -1,4 +1,4 @@
-package com.fanplayground.fanplayground.controller;
+package com.fanplayground.fanplayground.controller.serviceController;
 
 
 import com.fanplayground.fanplayground.dto.comment.CommentRequestDto;
@@ -33,10 +33,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 public class CommentControllerTest {
-
     @Autowired
     private ObjectMapper objectMapper;
-
 
     @Autowired
     private MockMvc mvc;
@@ -62,7 +60,6 @@ public class CommentControllerTest {
 
     @Test
     void createComment() throws Exception{
-
         Card card = new Card();
         card.setCardNo(1L);
         card.setCardId(1L);
@@ -73,9 +70,8 @@ public class CommentControllerTest {
 
         List<Card> cardList = new ArrayList<>();
 
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 3; i++)
             cardList.add(card);
-        }
 
         CommentRequestDto requestDto = CommentRequestDto.builder()
                 .cardId(card)
@@ -98,10 +94,8 @@ public class CommentControllerTest {
                         .content(objectMapper.writeValueAsString(requestDto))
                         .content(objectMapper.writeValueAsString(securityUserTest()))
                 )
-                .andExpect(status().isOk())
-                .andDo(print());
+                .andExpect(status().isOk());
     }
-
     @Test
     void updateComment() throws Exception{
 
@@ -115,9 +109,8 @@ public class CommentControllerTest {
 
         List<Card> cardList = new ArrayList<>();
 
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 3; i++)
             cardList.add(card);
-        }
 
         CommentRequestDto requestDto = CommentRequestDto.builder()
                 .cardId(card)
@@ -140,8 +133,7 @@ public class CommentControllerTest {
                         .content(objectMapper.writeValueAsString(requestDto))
                         .content(objectMapper.writeValueAsString(securityUserTest()))
                 )
-                .andExpect(status().isOk())
-                .andDo(print());
+                .andExpect(status().isOk());
     }
 
 
@@ -161,8 +153,6 @@ public class CommentControllerTest {
                         .content(objectMapper.writeValueAsString(securityUserTest()))
                         .content(objectMapper.writeValueAsString(requestDto))
                 )
-                .andExpect(status().isOk())
-                .andDo(print());
+                .andExpect(status().isOk());
     }
-
 }

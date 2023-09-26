@@ -1,10 +1,9 @@
 package com.fanplayground.fanplayground.controller.serviceController;
 
-
+import com.fanplayground.fanplayground.dto.message.MessageDto;
 import com.fanplayground.fanplayground.dto.user.signup.SignupRequestDto;
 import com.fanplayground.fanplayground.dto.user.update.UserUpdateRequestDto;
 import com.fanplayground.fanplayground.dto.user.update.UserUpdateResponseDto;
-import com.fanplayground.fanplayground.dto.message.MessageDto;
 import com.fanplayground.fanplayground.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;

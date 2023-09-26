@@ -1,11 +1,9 @@
 package com.fanplayground.fanplayground.controller.viewController;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@RequiredArgsConstructor
 @Controller
 public class BoardColumnManagementViewController {
 
@@ -23,5 +21,4 @@ public class BoardColumnManagementViewController {
     public String deleteColumn(Model model) {
         return "/column/columnDelete";
     }
-
 }

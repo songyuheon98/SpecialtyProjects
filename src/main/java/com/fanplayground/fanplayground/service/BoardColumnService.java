@@ -62,7 +62,6 @@ public class BoardColumnService {
         return new MessageUpdateDto("해당 컬럼명이 수정되었습니다", requestDto.getColumnName());
     }
 
-
     public MessageDto deleteBoardColumn(Long columnId) {
         System.out.println("여기는 delete column 시작");
         BoardColumn boardColumn = boardColumnRepository.findById(columnId).orElseThrow(() ->
@@ -79,7 +78,6 @@ public class BoardColumnService {
 
         for (int i = 0; i < board.getBoardColumns().size(); i++)
             board.getBoardColumns().get(i).setColumnNo(columnsNos.get(i));
-
 
         return new BoardColumnMoveResponseDto(board.getBoardColumns().stream().map(n->n.getColumnNo()).toList());
     }

@@ -1,6 +1,8 @@
 package com.fanplayground.fanplayground.controller.viewController;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
 public class CardManagementViewController {
     @GetMapping("/card/update")
     public String updateCard() {

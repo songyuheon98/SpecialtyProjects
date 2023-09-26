@@ -33,5 +33,4 @@ public class CardController {
     public String deleteCard(@PathVariable Long cardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return cardService.deleteCard(cardId,userDetails.getUser());
     }
-
 }
