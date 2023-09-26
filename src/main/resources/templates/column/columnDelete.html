@@ -4,20 +4,125 @@
 
 
     <title>컬럼 삭제</title>
+
+<style>
+    .card-detail {
+        margin-top: 200px;
+        border: 1px solid #e0e0e0;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: th: style = "${'background-color: ' + cardData.cardColor + ';'}";
+        margin: 100px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-detail p {
+        margin-bottom: 10px;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Noto+Sans+KR:wght@300&display=swap');
+    * {
+        /* 폰트 아직 고민중 */
+        font-family: 'Dongle', sans-serif;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .mydiv1 {
+        /* float: right; */
+        max-width: 400px;
+        margin: 40px auto auto auto;
+    }
+
+    .mydiv1 > h1, h5 {
+        /* float: right; */
+        text-align: center;
+        margin-top: 70px;
+    }
+
+    .wrap {
+        max-width: 400px;
+        margin: 40px auto auto auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        color: white;
+    }
+
+    .mytitle {
+        background-color: green;
+        max-width: 400px;
+        height: 200px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        padding: 30px 0px 0px 0px;
+        background-image: url('https://cdn4.vectorstock.com/i/1000x1000/76/73/red-delete-button-vector-9627673.jpg');
+        background-position: center;
+        background-size: cover;
+    }
+
+    .mydiv2 {
+        max-width: 400px;
+        padding: 5px 20px 20px 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        color: black;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #333333;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #555555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 94%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+</style>
 </head>
 <body>
 <div th:insert="navbar :: navbarFragment"></div>
 
-<div class="container mt-5">
+<div class="card-detail">
     <h2>컬럼 삭제</h2>
-    <form id="deleteColumnForm">
-        <div class="mb-3">
-            <label for="columnId" class="form-label">삭제할 컬럼 ID</label>
-            <input type="number" class="form-control" id="columnId" name="columnId" required>
+    <div class="wrap">
+
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mytitle"></div>
+
+                    <form id="deleteColumnForm">
+                        <div class="mb-3">
+                            <label for="columnId" class="form-label">삭제할 컬럼 ID</label>
+                            <input type="number" class="form-control" id="columnId" name="columnId" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger">삭제</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-danger">삭제</button>
-    </form>
+    </div>
 </div>
+
 
 <script>
     $(document).ready(function() {
