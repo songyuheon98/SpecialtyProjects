@@ -1,15 +1,108 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="commonHeader :: commonHeaderFragment"></head>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>보드 생성</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Noto+Sans+KR:wght@300&display=swap');
 
+        * {
+            /* 폰트 아직 고민중 */
+            font-family: 'Dongle', sans-serif;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .mydiv1 {
+            /* float: right; */
+            max-width: 400px;
+            margin: 40px auto auto auto;
+        }
+
+        .mydiv1 > h1, h5 {
+            /* float: right; */
+            text-align: center;
+        }
+
+        .wrap {
+            max-width: 400px;
+            margin: 40px auto auto auto;
+
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .mytitle {
+            background-color: green;
+
+            max-width: 400px;
+            height: 200px;
+
+            margin-bottom: 30px;
+
+            border-radius: 10px;
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 0px 0px 0px;
+
+            background-image: url('https://conceptboard.com/wp-content/uploads/Kanban-feature-Image.png');
+            background-position: center;
+            background-size: cover;
+        }
+
+        .mydiv2 {
+
+            max-width: 400px;
+
+
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #555555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 94%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
 <body>
+<div th:insert="navbar :: navbarFragment"></div>
+
+<div class="mydiv1">
+    <h1>보드 만들기</h1>
+</div>
+<div class="wrap">
     <form id="boardCreateForm">
+        <div class="mytitle"></div>
+        <div class="mydiv2">
         <label for="boardName">보드 이름:</label>
         <input type="text" id="boardName" name="boardName" required>
 
@@ -21,6 +114,7 @@
 
         <input type="button" onclick="createBoard()" value="보드 생성" class="btn btn-warning mybtn">
         <input type="button" onclick="mainPage()" value="메인으로" class="btn btn-warning mybtn">
+        </div>
 
     </form>
 

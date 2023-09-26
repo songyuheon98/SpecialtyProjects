@@ -11,7 +11,6 @@ on:
     branches: [ "main","develop" ]
 
 
-
 # 워크 플로우가 깃 레포에 대한 권한을 읽기 만 가능하게 설정한다.
 permissions:
   contents: read
@@ -56,27 +55,27 @@ jobs:
   
 
   # 배포 **
-#  deploy:
-#    needs: build
-#    runs-on: ubuntu-latest
-#
-#    # 위의 빌드작업한 JAR 파일 = 아티팩트를 다운로드
-#    steps:
-#    - name: Download build artifact
-#      uses: actions/download-artifact@v2
-#      with:
-#        name: trelloServer
-#        path: build/libs/
-#
-#    # EC2에 배포
-#    # EC2 SSH 키를 private_key.pem 파일로 저장 ( 위치는 GitHub 서버 )
-#    # SCP를 사용하여 JAR 파일을 EC2 서버로 복사
-#    # SSH를 사용하여 EC2 서버에 연결하고 현재 실행 중인 Java 프로세스를 종료한 다음 새로운 Java 프로세스 생성 및 실행!!
-#    ## NLP 적용하면 IP -> 도메인으로 수정 + EC2 늘리면 run 추가
-#    - name: Deploy to EC2
-#      run: |
-#        echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
-#        chmod 600 private_key.pem
-#        scp -i private_key.pem -o StrictHostKeyChecking=no build/libs/trelloServer-0.0.1-SNAPSHOT.jar ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/trelloServer.jar
-#        ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "pgrep java | xargs kill -9; nohup java -jar /home/${{ secrets.EC2_USERNAME }}/trelloServer.jar > app.log 2>&1 &"
-#        rm -f private_key.pem
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # 위의 빌드작업한 JAR 파일 = 아티팩트를 다운로드
+    steps:
+    - name: Download build artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: trelloServer
+        path: build/libs/
+
+    # EC2에 배포
+    # EC2 SSH 키를 private_key.pem 파일로 저장 ( 위치는 GitHub 서버 )
+    # SCP를 사용하여 JAR 파일을 EC2 서버로 복사
+    # SSH를 사용하여 EC2 서버에 연결하고 현재 실행 중인 Java 프로세스를 종료한 다음 새로운 Java 프로세스 생성 및 실행!!
+    ## NLP 적용하면 IP -> 도메인으로 수정 + EC2 늘리면 run 추가
+    - name: Deploy to EC2
+      run: |
+        echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
+        chmod 600 private_key.pem
+        scp -i private_key.pem -o StrictHostKeyChecking=no build/libs/trelloServer-0.0.1-SNAPSHOT.jar ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/trelloServer.jar
+        ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "pgrep java | xargs kill -9; nohup java -jar /home/${{ secrets.EC2_USERNAME }}/trelloServer.jar > app.log 2>&1 &"
+        rm -f private_key.pem

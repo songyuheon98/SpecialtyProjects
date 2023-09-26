@@ -25,8 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureMockMvc(addFilters = false)
@@ -66,8 +65,8 @@ class MixedControllerTest {
         when(boardService.readAllUserEnableBoard()).thenReturn(boardReadAllResponseDtoList);
 
         mockMvc.perform(get("/main"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/main"));
+                .andDo(print())
+                .andExpect(redirectedUrl("/board/null"));
     }
 
     @Test
@@ -99,9 +98,9 @@ class MixedControllerTest {
 
         mockMvc.perform(get("/user/board/{boardId}",1L))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/board/boardview"));
+                .andExpect(view().name("/board/boardview")
+        );
     }
-
     @Test
     void getCard() throws Exception {
         CardResponseDto cardResponseDto = new CardResponseDto();

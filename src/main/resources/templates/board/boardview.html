@@ -1,103 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head th:insert="commonHeader :: commonHeaderFragment"></head>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-          crossorigin="anonymous"></script>
 
   <title>보드 뷰</title>
+
   <style>
-    .container {
-      font-family: 'Noto Sans KR', sans-serif;
+    .background {
+      margin-top: 70px;
     }
 
-    #box {
-      width: 300px;
-      border-radius: 8px;
-      overflow: hidden;
-      margin: 100px auto;
-      transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+    .btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #333333;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
     }
 
-    #box:hover {
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-      transform: translateY(-10px);
+    .btn:hover {
+      background-color: #555555;
     }
   </style>
 </head>
 <body>
-<!--Header-->
-<nav class="navbar navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Trello</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li><a class="dropdown-item " href="/user/logout">로그아웃</a></li>
-          <li><a class="dropdown-item" href="/user/update">회원 수정</a></li>
-          <li><a class="dropdown-item" href="/user/escape">회원 탈퇴</a></li>
-
-          <p></p>
-          <li><a class="dropdown-item " href="/user/board">보드 생성</a></li>
-          <p></p>
-          <li><a class="dropdown-item" href="/card/create">카드 생성</a></li>
-          <li><a class="dropdown-item" href="/card/update">카드 수정</a></li>
-          <li><a class="dropdown-item" href="/card/delete">카드 삭제</a></li>
-          <p></p>
-          <li><a class="dropdown-item" href="/user/column/create">컬럼 생성</a></li>
-          <li><a class="dropdown-item" href="/user/column/update">컬럼 수정</a></li>
-          <li><a class="dropdown-item" href="/user/column/delete">컬럼 삭제</a></li>
-          <p></p>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              BoardChoice
-            </a>
-          </li>
-        </ul>
-
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</nav>
-
-
-<div class="container mt-5" >
-  <!-- 보드 제목과 배경색 -->
-  <div th:style="'background-color:' + ${boardData.boardColor}" class="board-header p-3 mb-4">
-    <h1 th:text="${boardData.boardName}"></h1>
-    <p th:text="${boardData.boardInfo}"></p>
-  </div>
-
-  <!-- 보드 컬럼들 -->
-  <div class="board-columns d-flex gap-4">
-    <div th:each="column : ${boardData.boardColumns}" class="board-column p-3 border" id="box">
-      <h2 th:onclick="'window.location.href=\'/user/column/' + ${column.columnId} + '\''" th:text="${column.columnName}"></h2>
-
-      <!-- 각 컬럼에 속한 카드들 -->
-      <div th:each="card : ${column.cards}" class="card mt-2 p-2">
-        <div class="card" th:onclick="'window.location.href=\'/user/card/' + ${card.cardId} + '\''">
-          <p class="card-name" th:text="${card.cardName}"></p>
-          <p class="card-deadline" th:text="${card.deadLine}"></p>
+<div th:insert="navbar :: navbarFragment"></div>
+<div class="background">
+  <div class="row row-cols-1 row-cols-md-5 g-4">
+    <div th:each="column : ${boardData.boardColumns}" class="col">
+      <div class="card h-100">
+        <img src="https://img.freepik.com/free-icon/clipboard-variant-with-pencil-and-check-mark-variant_318-49518.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${boardData.boardName}">Board name</h5>
+          <p class="card-text" th:text="${boardData.boardInfo}">Board info</p>
         </div>
-
-        <!-- 추가적인 카드 정보도 표시 가능 -->
+        <ul class="list-group list-group-flush">
+          <div th:each="card : ${column.cards}">
+            <a th:href="'/user/card/' + ${card.cardId}" class="card-link">
+              <li class="list-group-item" th:text="${card.cardName}">카드 이름</li>
+            </a>
+          </div>
+        </ul>
+        <a href="/user/board" class="btn btn-warning">보드 생성</a>
+        <a href="/user/column/create" class="btn btn-warning">컬럼 생성</a>
       </div>
     </div>
   </div>

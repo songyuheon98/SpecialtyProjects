@@ -61,6 +61,9 @@ public class MixedController {
 
     @GetMapping("/board/{boardId}")
     public String getBoard1(@PathVariable Long boardId, Model model) {
+        List<BoardReadAllResponseDto> boards = boardService.readAllUserEnableBoard();
+        model.addAttribute("boards", boards);
+
         BoardReadAllResponseDto boardSearchList = boardService.readChoiceBoard(boardId);
         model.addAttribute("boardData", boardSearchList);
         return "/board/boardview";

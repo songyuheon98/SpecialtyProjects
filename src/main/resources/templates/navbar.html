@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Navbar Fragment</title>
+
+</head>
+<body>
+<div th:fragment="navbarFragment">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeftNavbar" aria-controls="offcanvasLeftNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/main">Trello</a>
+
+            <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasLeftNavbar" aria-labelledby="offcanvasLeftNavbarLabel">
+
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li><a class="dropdown-item " href="/user/logout">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="/user/update">회원 수정</a></li>
+                        <li><a class="dropdown-item" href="/user/escape">회원 탈퇴</a></li>
+
+                        <p></p>
+                        <li><a class="dropdown-item " href="/user/board">보드 생성</a></li>
+                        <li><a class="dropdown-item" href="/user/board/update">보드 수정</a></li>
+                        <li><a class="dropdown-item" href="/user/board/delete">보드 삭제</a></li>
+                        <p></p>
+                        <li><a class="dropdown-item" href="/card/create">카드 생성</a></li>
+                        <li><a class="dropdown-item" href="/card/update">카드 수정</a></li>
+                        <li><a class="dropdown-item" href="/card/delete">카드 삭제</a></li>
+                        <p></p>
+                        <li><a class="dropdown-item" href="/user/column/create">컬럼 생성</a></li>
+                        <li><a class="dropdown-item" href="/user/column/update">컬럼 수정</a></li>
+                        <li><a class="dropdown-item" href="/user/column/delete">컬럼 삭제</a></li>
+
+                        <p></p>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                BoardChoice
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li th:each="board : ${boards}">
+                                    <a class="dropdown-item text-dark" th:href="'/user/board/' + ${board.boardId}" th:text="${board.boardId}"></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <p></p>
+                        <li><a class="dropdown-item" href="/main">메인으로</a></li>
+                        <p></p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
