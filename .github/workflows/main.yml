@@ -76,4 +76,17 @@ jobs:
           ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "pgrep java | xargs kill -9; nohup java -Dspring.resources.static-locations=file:/home/${{ secrets.EC2_USERNAME }}/resources/static/ -Dspring.thymeleaf.prefix=file:/home/${{ secrets.EC2_USERNAME }}/resources/templates/ -jar /home/${{ secrets.EC2_USERNAME }}/trelloServer.jar > app.log 2>&1 &"
 
           rm -f private_key.pem
+          
+          # server2
+          echo "${{ secrets.EC2_SSH_KEY2 }}" > private_key.pem
+          chmod 600 private_key.pem
+          scp -i private_key.pem -o StrictHostKeyChecking=no build/libs/trelloServer-0.0.1-SNAPSHOT.jar ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }}:/home/${{ secrets.EC2_USERNAME2 }}/trelloServer.jar
+          # EC2에서 resources 디렉터리 생성
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }} "mkdir -p /home/${{ secrets.EC2_USERNAME2 }}/resources/"
+          # 리소스 파일 EC2로 복사
+          scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/static ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }}:/home/${{ secrets.EC2_USERNAME2 }}/resources/
+          scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/templates ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }}:/home/${{ secrets.EC2_USERNAME2 }}/resources/
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }} "pgrep java | xargs kill -9; nohup java -Dspring.resources.static-locations=file:/home/${{ secrets.EC2_USERNAME2 }}/resources/static/ -Dspring.thymeleaf.prefix=file:/home/${{ secrets.EC2_USERNAME2 }}/resources/templates/ -jar /home/${{ secrets.EC2_USERNAME2 }}/trelloServer.jar > app.log 2>&1 &"
+
+          rm -f private_key.pem
 
