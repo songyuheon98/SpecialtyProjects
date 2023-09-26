@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureMockMvc(addFilters = false)
 @SpringBootTest
-class UserWebControllerTest {
+class BoardColumnManagementViewControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Test

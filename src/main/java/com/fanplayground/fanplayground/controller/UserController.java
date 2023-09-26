@@ -34,9 +34,6 @@ public class UserController {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletResponse response = attributes.getResponse();
 
-        /**
-         * 쿠키 삭제 기능 추가
-         */
         Cookie cookie = new Cookie("Authorization", null);
         cookie.setMaxAge(0);
         cookie.setPath("/");

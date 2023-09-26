@@ -41,7 +41,4 @@ public class BoardColumnController {
     public MessageDto deleteBoardColumn(@PathVariable Long columnId){
         return columnService.deleteBoardColumn(columnId);
     }
-
-
-
 }
