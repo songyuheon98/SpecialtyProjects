@@ -93,8 +93,10 @@
   <form id="cardUpdateForm">
     <div class="mytitle"></div>
     <div class="mydiv2">
-      <input type="hidden" id="cardId" name="cardId" value="20">
-
+      <div class="mb-3">
+        <label for="cardName">카드 ID:</label>
+        <input type="text" class="form-control" id="cardId" name="cardId" value="cardId1_update2" required>
+      </div>
       <div class="mb-3">
         <label for="cardName">카드 이름:</label>
         <input type="text" class="form-control" id="cardName" name="cardName" value="cardName1_update2" required>
