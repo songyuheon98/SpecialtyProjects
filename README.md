@@ -27,8 +27,8 @@
 ## **프로젝트 기술 스택**
 
 ### **1. Application**
-   - **프론트엔드:** HTML5, CSS3, JPA, Thymeleaf
-   - **백엔드:** Java, Gradle, Spring Boot, Spring Security
+   - **프론트엔드:** HTML5, CSS3, Thymeleaf
+   - **백엔드:** Java, Gradle, Spring Boot, Spring Security, JPA
 
 ### **2. Test**
    - JUnit5, Postman
