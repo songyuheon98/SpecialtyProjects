@@ -47,8 +47,11 @@
 
         <ul class="list-group list-group-flush">
           <div th:each="card : ${column.cards}">
+            <p class="card-text" th:text="'.         Card Id = ' + ${card.cardId}">columnId</p>
             <a th:href="'/user/card/' + ${card.cardId}" class="card-link">
+
               <li class="list-group-item" th:text="${card.cardName}">카드 이름</li>
+
             </a>
           </div>
         </ul>
