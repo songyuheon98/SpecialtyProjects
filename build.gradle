@@ -43,6 +43,8 @@ dependencies {
 	implementation 'com.h2database:h2:2.1.214'
 	implementation 'org.springframework.security:spring-security-test:6.1.2'
 	implementation 'org.mockito:mockito-core:5.4.0'
+	implementation 'com.seoduct:logback-slack-appender:1.0.0'
+
 	testImplementation 'org.mockito:mockito-inline:5.2.0'
 	implementation 'org.mockito:mockito-inline:5.2.0'
 
@@ -64,6 +66,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// slack logback
+	implementation 'com.github.maricn:logback-slack-appender:1.4.0'
 
 
 	// swagger
