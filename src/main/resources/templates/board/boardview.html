@@ -37,9 +37,14 @@
         <img src="https://img.freepik.com/free-icon/clipboard-variant-with-pencil-and-check-mark-variant_318-49518.jpg"
              class="card-img-top" alt="..." style="width: 50px; height: 50px;">
         <div class="card-body">
-          <h5 class="card-title" th:text="${column.columnName}">column name</h5>
-          <p class="card-text" th:text="${column.columnNo}">columnNo</p>
+          <a th:href="@{/user/card/{cardId}(cardId=${column.columnId})}">
+            <h5 class="card-title" th:text="${column.columnName}">column name</h5>
+          </a>
+          <p class="card-text" th:text="'Column Id = ' + ${column.columnId}">columnId</p>
+
+
         </div>
+
         <ul class="list-group list-group-flush">
           <div th:each="card : ${column.cards}">
             <a th:href="'/user/card/' + ${card.cardId}" class="card-link">

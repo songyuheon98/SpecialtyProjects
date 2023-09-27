@@ -21,4 +21,6 @@ public class BoardColumnManagementViewController {
     public String deleteColumn() {
         return "/column/columnDelete";
     }
+
+
 }
