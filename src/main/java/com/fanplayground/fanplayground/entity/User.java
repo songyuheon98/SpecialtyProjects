@@ -40,7 +40,7 @@ public class User {
     /**
      * User : Board = 1 : n
      */
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true,fetch = FetchType.LAZY )
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private List<Board> boards = new ArrayList<>();
@@ -48,7 +48,7 @@ public class User {
     /**
      * User : userBoard = 1 : n
      */
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true,fetch = FetchType.LAZY  )
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private List<UserBoard> userBoards = new ArrayList<>();
