@@ -2,9 +2,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "main","develop","Final" ]
+    branches: [ "main"]
   pull_request:
-    branches: [ "main","develop" ,"Final"]
+    branches: [ "main"]
 
 permissions:
   contents: read
@@ -21,6 +21,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set up environment for build
+        run: |
+          echo "AMAZON_DATABASE_URL=${{ secrets.AMAZON_DATABASE_URL }}" >> $GITHUB_ENV
+          echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}" >> $GITHUB_ENV
+          echo "LOGGING_SLACK_WEBHOOK_URL=${{ secrets.LOGGING_SLACK_WEBHOOK_URL }}" >> $GITHUB_ENV
+          echo "RDS_DATABASE_PASSWORD=${{ secrets.RDS_DATABASE_PASSWORD }}" >> $GITHUB_ENV
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -31,7 +38,8 @@ jobs:
 
       # 리소스 파일 복사
       - name: Copy resources
-        run: cp -r src/main/resources/* build/resources/
+        run: |
+          cp -r src/main/resources/* build/resources/
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
@@ -63,6 +71,7 @@ jobs:
           name: resources
           path: build/resources/
 
+      # EC2에 복사 및 배포
       - name: Deploy to EC2
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
@@ -71,8 +80,7 @@ jobs:
           # EC2에서 resources 디렉터리 생성
           ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "mkdir -p /home/${{ secrets.EC2_USERNAME }}/resources/"
           # 리소스 파일 EC2로 복사
-          scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/static ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/resources/
-          scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/templates ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/resources/
+          scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/* ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USERNAME }}/resources/
           ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} "pgrep java | xargs kill -9; nohup java -Dspring.resources.static-locations=file:/home/${{ secrets.EC2_USERNAME }}/resources/static/ -Dspring.thymeleaf.prefix=file:/home/${{ secrets.EC2_USERNAME }}/resources/templates/ -jar /home/${{ secrets.EC2_USERNAME }}/trelloServer.jar > app.log 2>&1 &"
 
           rm -f private_key.pem
@@ -84,9 +92,7 @@ jobs:
           # EC2에서 resources 디렉터리 생성
           ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }} "mkdir -p /home/${{ secrets.EC2_USERNAME2 }}/resources/"
           # 리소스 파일 EC2로 복사
-          scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/static ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }}:/home/${{ secrets.EC2_USERNAME2 }}/resources/
-          scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/templates ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }}:/home/${{ secrets.EC2_USERNAME2 }}/resources/
+          scp -i private_key.pem -o StrictHostKeyChecking=no -r build/resources/* ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }}:/home/${{ secrets.EC2_USERNAME2 }}/resources/
           ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME2 }}@${{ secrets.EC2_HOST2 }} "pgrep java | xargs kill -9; nohup java -Dspring.resources.static-locations=file:/home/${{ secrets.EC2_USERNAME2 }}/resources/static/ -Dspring.thymeleaf.prefix=file:/home/${{ secrets.EC2_USERNAME2 }}/resources/templates/ -jar /home/${{ secrets.EC2_USERNAME2 }}/trelloServer.jar > app.log 2>&1 &"
 
           rm -f private_key.pem
-
