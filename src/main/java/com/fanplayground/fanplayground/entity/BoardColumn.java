@@ -30,7 +30,7 @@ public class BoardColumn {
     /**
      * BoardColumn : Card = 1 : n
      */
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "column_id")
     @JsonBackReference
     private List<Card> cards = new ArrayList<>();
