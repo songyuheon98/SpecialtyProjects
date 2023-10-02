@@ -25,7 +25,7 @@ public class Comment {
     @Column(name = "nickName", nullable = false)
     private String nickName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
     private Card card;
 
